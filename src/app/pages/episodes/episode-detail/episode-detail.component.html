@@ -1,3 +1,5 @@
+<app-mobile-admin-menu [menuItems]="menuItems" />
+
 <div class="episode-detail-page" *ngIf="!loading() && episode()">
   <h2 class="title">{{ episode()?.title }}</h2>
 
@@ -7,6 +9,7 @@
 
   <audio controls class="audio-player">
     <source [src]="episode()?.audio_url" type="audio/mpeg" />
+    Your browser does not support the audio element.
   </audio>
 
   <div class="meta">
@@ -18,8 +21,8 @@
   </div>
 
   <div class="links">
-    <a [href]="episode()?.spotify_url" target="_blank">Spotify</a>
-    <a [href]="episode()?.apple_podcasts_url" target="_blank">Apple</a>
+    <a *ngIf="episode()?.spotify_url" [href]="episode()?.spotify_url" target="_blank">Spotify</a>
+    <a *ngIf="episode()?.apple_podcasts_url" [href]="episode()?.apple_podcasts_url" target="_blank">Apple</a>
   </div>
 </div>
 

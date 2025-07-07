@@ -1,1 +1,30 @@
-<p>admin-playlist-form works!</p>
+<div class="admin-playlist-form" *ngIf="!loading()">
+  <h2>{{ isEdit ? '✏️ Edit Playlist' : '➕ Create Playlist' }}</h2>
+
+  <form [formGroup]="playlistForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label>Title</label>
+      <input formControlName="title" placeholder="Enter playlist title" />
+    </div>
+
+    <div class="form-group">
+      <label>Episode ID</label>
+      <input type="number" formControlName="episode_id" placeholder="Enter episode ID" />
+    </div>
+
+    <div class="form-group">
+      <label>Playlist Items</label>
+      <div formArrayName="items" class="playlist-items">
+        <div *ngFor="let itemCtrl of items.controls; let i = index" class="item-row">
+          <input [formControlName]="i" placeholder="Segment {{ i + 1 }}" />
+          <button type="button" (click)="removeItem(i)">🗑️</button>
+        </div>
+        <button type="button" (click)="addItem()">➕ Add Segment</button>
+      </div>
+    </div>
+
+    <button type="submit" [disabled]="playlistForm.invalid" class="save-btn">
+      {{ isEdit ? 'Update Playlist' : 'Create Playlist' }}
+    </button>
+  </form>
+</div>

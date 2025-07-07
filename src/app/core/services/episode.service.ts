@@ -18,9 +18,10 @@ export class EpisodeService {
   }
 
   // Fetch a single episode by ID
-  getEpisode(id: number): Observable<{ status: string; data: Episode }> {
-    return this.http.get<{ status: string; data: Episode }>(`${this.baseUrl}/${id}`);
-  }
+ getEpisode(idOrSlug: string): Observable<{ status: string; data: Episode }> {
+  return this.http.get<{ status: string; data: Episode }>(`${this.baseUrl}/${idOrSlug}`);
+}
+
 
   // Create new episode
   addEpisode(episode: any): Observable<any> {

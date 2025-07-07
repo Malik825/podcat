@@ -1,5 +1,39 @@
-<section class="dashboard-welcome">
-    <h1>Welcome back, {{ userName }}! 👋</h1>
-    <p>Manage your content using the side menu.</p>
-  </section>
-  
+<div class="dashboard">
+  <h2>👋 Welcome back, {{ userName() }}!</h2>
+
+  <!-- Stats -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <h3>🎧 Total Episodes</h3>
+      <p>{{ totalEpisodes() }}</p>
+    </div>
+    <div class="stat-card">
+      <h3>👥 Team Members</h3>
+      <p>{{ totalTeam() }}</p>
+    </div>
+  </div>
+
+  <!-- Donut and Line Charts -->
+  <div class="charts-grid">
+    <div class="chart-box">
+      <h3>🍩 Episodes by Season</h3>
+      <apx-chart
+        [series]="donutSeries"
+        [chart]="{ type: 'donut' }"
+        [labels]="donutLabels"
+        [responsive]="[{ breakpoint: 480, options: { chart: { width: 300 }, legend: { position: 'bottom' } } }]"
+      ></apx-chart>
+    </div>
+
+    <div class="chart-box">
+      <h3>📈 Episodes Over Time</h3>
+      <apx-chart
+        [series]="lineSeries"
+        [chart]="lineChartOptions"
+        [xaxis]="xAxis"
+        [dataLabels]="dataLabels"
+        [title]="chartTitle"
+      ></apx-chart>
+    </div>
+  </div>
+</div>
