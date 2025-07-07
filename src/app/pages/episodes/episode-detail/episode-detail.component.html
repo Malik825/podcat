@@ -1,5 +1,27 @@
-<p>episode-detail works!</p>
-<app-mobile-admin-menu
-  class="scroll-aware-menu"
-  [menuItems]="menuItems"
-></app-mobile-admin-menu>
+<div class="episode-detail-page" *ngIf="!loading() && episode()">
+  <h2 class="title">{{ episode()?.title }}</h2>
+
+  <img [src]="episode()?.img_url" [alt]="episode()?.title" class="cover" />
+
+  <p class="description">{{ episode()?.description }}</p>
+
+  <audio controls class="audio-player">
+    <source [src]="episode()?.audio_url" type="audio/mpeg" />
+  </audio>
+
+  <div class="meta">
+    <p><strong>Season:</strong> {{ episode()?.season }}</p>
+    <p><strong>Episode:</strong> {{ episode()?.episode }}</p>
+    <p><strong>Duration:</strong> {{ episode()?.duration }}</p>
+    <p><strong>Posted on:</strong> {{ episode()?.posted_on | date }}</p>
+    <p><strong>Featured:</strong> {{ episode()?.featured === '1' ? 'Yes' : 'No' }}</p>
+  </div>
+
+  <div class="links">
+    <a [href]="episode()?.spotify_url" target="_blank">Spotify</a>
+    <a [href]="episode()?.apple_podcasts_url" target="_blank">Apple</a>
+  </div>
+</div>
+
+<div *ngIf="loading()" class="loading">Loading episode...</div>
+<div *ngIf="error()" class="error">{{ error() }}</div>

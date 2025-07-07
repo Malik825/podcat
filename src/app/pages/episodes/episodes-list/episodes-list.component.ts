@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, effect, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
 import { MobileAdminMenuComponent } from '../../../shared/components/mobile-admin-menu/mobile-admin-menu.component';
@@ -11,11 +11,17 @@ import {
 } from 'lucide-angular';
 import { EpisodeService } from '../../../core/services/episode.service';
 import { Episode } from '../../../models/episode.model';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-episodes-list',
   standalone: true,
-  imports: [CommonModule, HeaderComponent, MobileAdminMenuComponent],
+ imports: [
+    CommonModule,
+    HeaderComponent,
+    MobileAdminMenuComponent,
+    RouterModule // ✅ Required for routerLink
+  ],
   templateUrl: './episodes-list.component.html',
   styleUrls: ['./episodes-list.component.scss']
 })
@@ -28,21 +34,22 @@ export class EpisodesListComponent implements OnInit {
     { label: 'Team', icon: Users, route: ['/team'] }
   ];
 
-  episodes: Episode[] = [];
-  loading = true;
-  error = '';
+  // ✅ Signals
+  episodes = signal<Episode[]>([]);
+  loading = signal(true);
+  error = signal<string | null>(null);
 
   constructor(private episodeService: EpisodeService) {}
 
   ngOnInit(): void {
     this.episodeService.getEpisodes().subscribe({
-      next: (res) => {
-        this.episodes = res.data;
-        this.loading = false;
+      next: (res: { status: string; data: Episode[] }) => {
+        this.episodes.set(res.data);
+        this.loading.set(false);
       },
-      error: (err) => {
-        this.error = 'Failed to load episodes';
-        this.loading = false;
+      error: (err: unknown) => {
+        this.error.set('Failed to load episodes');
+        this.loading.set(false);
       }
     });
   }

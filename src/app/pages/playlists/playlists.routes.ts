@@ -7,4 +7,9 @@ export const PLAYLISTS_ROUTES: Routes = [
     component: PlaylistsComponent,
     title: 'Playlists',
   },
+  {
+    path: ':id', // ✅ route for `/playlists/:id`
+    component: PlaylistsComponent,
+    title: 'Playlist Details',
+  }
 ];

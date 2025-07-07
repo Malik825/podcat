@@ -1,0 +1,46 @@
+.admin-playlists {
+  h2 {
+    margin-bottom: 1rem;
+  }
+
+  .actions {
+    margin-bottom: 1rem;
+  }
+
+  .playlist-table {
+    width: 100%;
+    border-collapse: collapse;
+
+    th, td {
+      border: 1px solid #333;
+      padding: 0.75rem;
+      text-align: left;
+    }
+
+    th {
+      background-color: #222;
+    }
+
+    td button {
+      background: none;
+      border: none;
+      color: red;
+      cursor: pointer;
+    }
+
+    td a {
+      margin-right: 1rem;
+    }
+  }
+
+  .status {
+    color: gray;
+    margin-top: 1rem;
+    &.error {
+      color: red;
+    }
+    &.empty {
+      font-style: italic;
+    }
+  }
+}

@@ -1,5 +1,19 @@
 <app-header></app-header>
-<p>playlists works!</p>
+<div class="playlists-page">
+  <h2 class="page-title">🎵 Playlist</h2>
+
+  <div *ngIf="loading()" class="status loading">Loading playlist...</div>
+  <div *ngIf="error()" class="status error">{{ error() }}</div>
+
+  <div *ngIf="playlist() as p">
+    <h3>{{ p.title }}</h3>
+
+    <ul class="playlist-items">
+      <li *ngFor="let item of p.items">🎧 {{ item }}</li>
+    </ul>
+  </div>
+</div>
+
 <app-mobile-admin-menu
   class="scroll-aware-menu"
   [menuItems]="menuItems"

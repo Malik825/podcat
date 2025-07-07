@@ -1,1 +1,36 @@
-<p>admin-playlists works!</p>
+<div class="admin-playlists">
+  <h2>🎶 All Playlists</h2>
+
+  <div *ngIf="loading()" class="status loading">Loading...</div>
+  <div *ngIf="error()" class="status error">{{ error() }}</div>
+
+  <div class="actions">
+    <a routerLink="/admin/playlists/new" class="btn btn-primary">➕ New Playlist</a>
+  </div>
+
+  <table *ngIf="!loading() && playlists().length > 0" class="playlist-table">
+    <thead>
+      <tr>
+        <th>Title</th>
+        <th>Episode ID</th>
+        <th># Items</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let playlist of playlists()">
+        <td>{{ playlist.title }}</td>
+        <td>{{ playlist.episode_id }}</td>
+        <td>{{ playlist.items.length }}</td>
+        <td>
+          <a [routerLink]="['/admin/playlists', playlist.id, 'edit']">✏️ Edit</a>
+          <button (click)="deletePlaylist(playlist.id)">🗑️ Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="!loading() && playlists().length === 0" class="status empty">
+    No playlists found.
+  </div>
+</div>

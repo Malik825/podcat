@@ -1,12 +1,17 @@
 <div class="episodes-page">
   <h2 class="page-title">🎙️ Latest Podcast Episodes</h2>
 
-  <div *ngIf="loading" class="status loading">Loading...</div>
-  <div *ngIf="error" class="status error">{{ error }}</div>
+  <div *ngIf="loading()" class="status loading">Loading...</div>
+  <div *ngIf="error()" class="status error">{{ error() }}</div>
 
-  <div *ngIf="!loading && episodes.length > 0" class="episode-grid">
-    <div *ngFor="let episode of episodes" class="episode-card">
-      
+  <div *ngIf="!loading() && episodes().length > 0" class="episode-grid">
+    <!-- 🔗 Navigate to playlist -->
+    <a
+      *ngFor="let episode of episodes()"
+      class="episode-card"
+      [routerLink]="['/playlists', episode.id]"
+      style="text-decoration: none; color: inherit;"
+    >
       <div class="image-container">
         <img [src]="episode.img_url" [alt]="episode.title" />
         <span class="duration">{{ episode.duration }}</span>
@@ -29,14 +34,14 @@
         </audio>
 
         <div class="links">
-          <a *ngIf="episode.spotify_url" [href]="episode.spotify_url" target="_blank">Spotify</a>
-          <a *ngIf="episode.apple_podcasts_url" [href]="episode.apple_podcasts_url" target="_blank">Apple</a>
+          <span *ngIf="episode.spotify_url">🎧 Spotify</span>
+          <span *ngIf="episode.apple_podcasts_url">🍎 Apple</span>
         </div>
       </div>
-    </div>
+    </a>
   </div>
 
-  <div *ngIf="!loading && episodes.length === 0" class="status empty">
+  <div *ngIf="!loading() && episodes().length === 0" class="status empty">
     No episodes available at the moment.
   </div>
 </div>
