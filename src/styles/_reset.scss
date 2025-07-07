@@ -10,6 +10,8 @@
   margin: 0;
   padding: 0;
   font: inherit;
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 html:focus-within {
@@ -65,4 +67,8 @@ table {
 button {
   cursor: pointer;
 }
-
+.container{
+  width: 100%;
+  max-width:85%;
+  margin: 0 auto;
+}
