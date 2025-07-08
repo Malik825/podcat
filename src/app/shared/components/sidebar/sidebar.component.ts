@@ -41,9 +41,9 @@ export class SidebarComponent {
   showLogoutModal = false;
 
   admin = {
-    name: 'Ernest Anokye',
-    email: 'eernesto211@gmail.com',
-    avatar: 'https://ui-avatars.com/api/?name=Ernest+Anokye'
+    name: 'Abdul Malik',
+    email: 'amalik75@gmail.com',
+    avatar: 'https://ui-avatars.com/api/?name=Abdul+Malik&background=random&color=fff'
   };
 
   constructor(

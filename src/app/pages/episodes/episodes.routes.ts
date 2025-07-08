@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
-import { EpisodesListComponent } from '../episodes/episodes-list/episodes-list.component';
-import { EpisodeDetailComponent } from '../episodes/episode-detail/episode-detail.component';
+import { EpisodeDetailComponent } from './episode-detail/episode-detail.component';
+import { EpisodesListComponent } from './episodes-list/episodes-list.component';
+
 
 export const EPISODES_ROUTES: Routes = [
   {

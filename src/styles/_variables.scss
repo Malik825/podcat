@@ -1,3 +1,5 @@
+// import Poppins
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 :root {
   --background: hsl(0, 0%, 100%);
   --foreground: hsl(222.2, 84%, 4.9%);
@@ -41,6 +43,7 @@
 
   // fonts
   --font-sans: 'Noto Sans', sans-serif;
+  --font-poppins: 'Poppins', sans-serif;
 }
 
 
