@@ -1,30 +1,36 @@
-<div class="admin-playlist-form" *ngIf="!loading()">
-  <h2>{{ isEdit ? '✏️ Edit Playlist' : '➕ Create Playlist' }}</h2>
-
-  <form [formGroup]="playlistForm" (ngSubmit)="onSubmit()">
-    <div class="form-group">
-      <label>Title</label>
-      <input formControlName="title" placeholder="Enter playlist title" />
+<div class="panda-container">
+  <div class="panda">
+    <div class="ear"></div>
+    <div class="face">
+      <div class="eye-shade"></div>
+      <div class="eye-white"><div class="eye-ball"></div></div>
+      <div class="eye-shade rgt"></div>
+      <div class="eye-white rgt"><div class="eye-ball"></div></div>
+      <div class="nose"></div>
+      <div class="mouth"></div>
     </div>
+    <div class="body"></div>
+    <div class="hand"></div>
+    <div class="hand rgt"></div>
+    <div class="foot"><div class="finger"></div></div>
+    <div class="foot rgt"><div class="finger"></div></div>
+  </div>
+</div>
 
+<!-- Form Card -->
+<div class="admin-playlist-form">
+  <h2>Panda Login</h2>
+  <form>
     <div class="form-group">
-      <label>Episode ID</label>
-      <input type="number" formControlName="episode_id" placeholder="Enter episode ID" />
+      <input type="text" class="form-control" required />
+      <label class="form-label">Username</label>
     </div>
-
     <div class="form-group">
-      <label>Playlist Items</label>
-      <div formArrayName="items" class="playlist-items">
-        <div *ngFor="let itemCtrl of items.controls; let i = index" class="item-row">
-          <input [formControlName]="i" placeholder="Segment {{ i + 1 }}" />
-          <button type="button" (click)="removeItem(i)">🗑️</button>
-        </div>
-        <button type="button" (click)="addItem()">➕ Add Segment</button>
-      </div>
+      <input type="password" class="form-control" required />
+      <label class="form-label">Password</label>
     </div>
-
-    <button type="submit" [disabled]="playlistForm.invalid" class="save-btn">
-      {{ isEdit ? 'Update Playlist' : 'Create Playlist' }}
-    </button>
+    <div class="form-actions">
+      <button class="btn">Login</button>
+    </div>
   </form>
 </div>

@@ -7,9 +7,9 @@ import { CommonModule } from '@angular/common';
 @Component({
   selector: 'app-admin-playlists',
   standalone: true,
-  imports: [CommonModule, RouterModule],
   templateUrl: './admin-playlists.component.html',
-  styleUrls: ['./admin-playlists.component.scss']
+  styleUrl: './admin-playlists.component.scss',
+  imports: [CommonModule, RouterModule]
 })
 export class AdminPlaylistsComponent implements OnInit {
   playlists = signal<Playlist[]>([]);
@@ -19,26 +19,30 @@ export class AdminPlaylistsComponent implements OnInit {
   constructor(private playlistService: PlaylistService) {}
 
   ngOnInit(): void {
-    this.playlistService.getAll().subscribe({
+    this.fetchPlaylists();
+  }
+
+  fetchPlaylists(): void {
+    this.loading.set(true);
+    this.playlistService.getPlaylists().subscribe({
       next: (res) => {
-        this.playlists.set(res.data.data); // paginated structure
+        this.playlists.set(res.data.data);
         this.loading.set(false);
       },
       error: () => {
-        this.error.set('Failed to fetch playlists');
+        this.error.set('Failed to load playlists');
         this.loading.set(false);
       }
     });
   }
 
   deletePlaylist(id: number): void {
-    if (confirm('Are you sure you want to delete this playlist?')) {
-      this.playlistService.delete(id).subscribe({
-        next: () => {
-          this.playlists.update(list => list.filter(p => p.id !== id));
-        },
-        error: () => alert('Delete failed.')
-      });
-    }
+    const confirmDelete = confirm('Are you sure you want to delete this playlist?');
+    if (!confirmDelete) return;
+
+    this.playlistService.deletePlaylist(id).subscribe({
+      next: () => this.fetchPlaylists(),
+      error: () => alert('Failed to delete playlist')
+    });
   }
 }

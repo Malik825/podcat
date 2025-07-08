@@ -1,36 +1,27 @@
 <div class="admin-playlists">
-  <h2>🎶 All Playlists</h2>
-
-  <div *ngIf="loading()" class="status loading">Loading...</div>
-  <div *ngIf="error()" class="status error">{{ error() }}</div>
-
-  <div class="actions">
-    <a routerLink="/admin/playlists/new" class="btn btn-primary">➕ New Playlist</a>
+  <div class="header">
+    <h2>📂 All Playlists</h2>
+    <a routerLink="/admin/playlists/new" class="btn-new">
+      ➕ New Playlist
+    </a>
   </div>
 
-  <table *ngIf="!loading() && playlists().length > 0" class="playlist-table">
-    <thead>
-      <tr>
-        <th>Title</th>
-        <th>Episode ID</th>
-        <th># Items</th>
-        <th>Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let playlist of playlists()">
-        <td>{{ playlist.title }}</td>
-        <td>{{ playlist.episode_id }}</td>
-        <td>{{ playlist.items.length }}</td>
-        <td>
-          <a [routerLink]="['/admin/playlists', playlist.id, 'edit']">✏️ Edit</a>
-          <button (click)="deletePlaylist(playlist.id)">🗑️ Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+  <div *ngIf="loading()" class="loading">Loading playlists...</div>
+  <div *ngIf="error()" class="error">{{ error() }}</div>
 
-  <div *ngIf="!loading() && playlists().length === 0" class="status empty">
-    No playlists found.
+  <div *ngIf="!loading() && playlists().length > 0" class="playlist-grid">
+    <div *ngFor="let playlist of playlists()" class="playlist-card">
+      <h3>{{ playlist.title }}</h3>
+      <p>{{ playlist.description }}</p>
+
+      <div class="actions">
+        <a [routerLink]="['/admin/playlists', playlist.id, 'edit']" class="btn-edit">✏️ Edit</a>
+        <button (click)="deletePlaylist(playlist.id)" class="btn-delete">🗑️ Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!loading() && playlists().length === 0" class="empty">
+    No playlists available.
   </div>
 </div>

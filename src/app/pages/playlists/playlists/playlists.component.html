@@ -1,20 +1,18 @@
-<app-header></app-header>
 <div class="playlists-page">
-  <h2 class="page-title">🎵 Playlist</h2>
+  <h2>📂 All Playlists</h2>
 
-  <div *ngIf="loading()" class="status loading">Loading playlist...</div>
+  <div *ngIf="loading()" class="status loading">Loading playlists...</div>
   <div *ngIf="error()" class="status error">{{ error() }}</div>
 
-  <div *ngIf="playlist() as p">
-    <h3>{{ p.title }}</h3>
+  <div *ngIf="!loading() && playlists().length > 0" class="playlist-grid">
+    <div *ngFor="let playlist of playlists()" class="playlist-card">
+      <h3>{{ playlist.title }}</h3>
+      <p>{{ playlist.description }}</p>
+      <p>🎧 Episodes: {{ playlist.episodes.length }}</p>
+    </div>
+  </div>
 
-    <ul class="playlist-items">
-      <li *ngFor="let item of p.items">🎧 {{ item }}</li>
-    </ul>
+  <div *ngIf="!loading() && playlists().length === 0" class="status empty">
+    No playlists available.
   </div>
 </div>
-
-<app-mobile-admin-menu
-  class="scroll-aware-menu"
-  [menuItems]="menuItems"
-></app-mobile-admin-menu>

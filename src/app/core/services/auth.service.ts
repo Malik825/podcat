@@ -24,7 +24,8 @@ export class AuthService {
         if (res.status === 'success') {
           localStorage.setItem('token', res.data.token);
           localStorage.setItem('user', JSON.stringify(res.data.user));
-          console.log('[AuthService] User logged in:', res.data.user);
+
+          console.log('[AuthService] User logged in:', res.data.token);
         }
       })
     );
