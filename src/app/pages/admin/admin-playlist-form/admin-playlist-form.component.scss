@@ -319,3 +319,54 @@
     }
   }
 }
+// Shared glowing style for inputs & selects
+::ng-deep .mat-form-field-appearance-fill .mat-form-field-flex {
+  box-shadow: 0 0 0 0 rgba(var(--primary-rgb), 0.1);
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.08);
+  }
+
+  &.mat-focused {
+    box-shadow: 0 0 0 3px rgba(var(--primary-rgb), 0.15);
+  }
+}
+
+// Fix select background for dark mode
+::ng-deep .mat-select-panel {
+  background: var(--background);
+  color: var(--foreground);
+}
+
+// Form matches card style
+.admin-playlist-form {
+  background: linear-gradient(to bottom, #0f111a, #151828);
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2);
+}
+
+// Additional consistency with card visuals
+.admin-playlists {
+  .playlist-card {
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    .view-btn {
+      font-weight: 500;
+      font-family: var(--font-poppins);
+      letter-spacing: 0.5px;
+      background-color: var(--accent);
+      color: var(--accent-foreground);
+      border: none;
+
+      &:hover {
+        background: color-mix(in srgb, var(--accent) 90%, black 10%);
+      }
+    }
+  }
+}

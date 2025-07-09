@@ -8,25 +8,44 @@
   <div *ngIf="error()" class="error">{{ error() }}</div>
 
   <div *ngIf="!loading() && playlists().length > 0" class="playlist-grid">
-    <div *ngFor="let playlist of playlists()" class="playlist-card">
-      <div class="card-header">
-        <img [src]="getPlaylistImage(playlist.id)" alt="Playlist cover" class="cover-img" />
-        <button class="btn-follow">+</button>
+    <div class="playlist-card" *ngFor="let playlist of playlists()">
+      <div class="card-cover">
+        <img [src]="'https://picsum.photos/300/200?random=' + playlist.id" alt="Playlist Cover" />
       </div>
-      <div class="card-body">
+
+      <div class="card-content">
         <h3>{{ playlist.name }}</h3>
-        <p class="username">&copy;{{ playlist.name | lowercase }}</p>
-        <p class="role">Playlist Creator</p>
-        <div class="stats">
-          <span>17 <small>Shots</small></span>
-          <span>143 <small>Following</small></span>
-          <span>57 <small>Followers</small></span>
-        </div>
-        <div class="actions">
-          <a  [routerLink]="['/admin/playlists', playlist.id, 'edit']" class="btn-message">✏️ Edit</a>
-          <button  (click)="deletePlaylist(playlist.id)" class="btn-more">🗑️ Delete</button>
+        <p class="creator">By Music Lover</p>
+
+        <div class="meta">
+          <span>🎧 {{ playlist.episodes.length }} episodes</span>
+          <span>🕒 ~{{ estimateDuration(playlist.episodes.length) }}</span>
+          <span>❤️ 1.2K</span>
         </div>
       </div>
+
+      <div class="card-controls">
+        <button class="play-btn" routerLink="/episodes">▶</button>
+        <div class="actions">
+          <button>♡</button>
+          <button (click)="deletePlaylist(playlist.id)">
+            <lucide-angular name="trash-2" size="18" strokeWidth="2"></lucide-angular>
+          </button>
+        </div>
+      </div>
+
+      <div class="tracklist">
+        <div *ngFor="let item of playlist.items?.slice(0, 4); let i = index" class="track">
+          <span class="index">{{ i + 1 }}</span>
+          <div class="info">
+            <strong>{{ item }}</strong>
+            <small>Guest Speaker</small>
+          </div>
+          <span class="duration">{{ getRandomDuration() }}</span>
+        </div>
+      </div>
+
+      <button class="view-btn" routerLink="/episodes">VIEW ALL EPISODES</button>
     </div>
   </div>
 

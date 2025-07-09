@@ -116,47 +116,35 @@ export class AdminPlaylistFormComponent implements OnInit {
     this.items.removeAt(index);
   }
 
-  onSubmit(): void {
-    const formValue = this.playlistForm.value;
+ onSubmit(): void {
+  const formValue = this.playlistForm.value;
 
-    const payload = {
-      name: formValue.title,
-      description: formValue.description,
-      featured: formValue.featured,
-      episodes: formValue.episodes,
-      items: formValue.items
-    };
+  const payload = {
+    name: formValue.title,
+    description: formValue.description,
+    featured: formValue.featured,
+    episodes: formValue.episodes,
+    items: formValue.items
+  };
 
-    console.log('📦 Payload:', payload);
-
-    if (this.isEdit) {
-      this.playlistService.updatePlaylist(this.playlistId!, payload).subscribe({
-        next: () => {
-          alert('✅ Playlist updated!');
-          this.router.navigate(['/admin/playlists']);
-        },
-        error: (err) => {
-          console.error('❌ Update failed:', err);
-          alert('Failed to update playlist. Check console for details.');
-        }
+  if (this.isEdit) {
+    this.playlistService.updatePlaylist(this.playlistId!, payload).subscribe(() => {
+      this.router.navigate(['/admin/playlists']);
+    });
+  } else {
+    this.playlistService.createPlaylist(payload).subscribe(() => {
+      this.playlistForm.reset({
+        title: '',
+        description: '',
+        featured: false,
+        episodes: []
       });
-    } else {
-      this.playlistService.createPlaylist(payload).subscribe({
-        next: () => {
-          alert('✅ Playlist created!');
-          this.playlistForm.reset({
-            title: '',
-            description: '',
-            featured: false,
-            episodes: []
-          });
-          this.items.clear();
-        },
-        error: (err) => {
-          console.error('❌ Creation failed:', err);
-          alert('Failed to create playlist. Check console for details.');
-        }
-      });
-    }
+      this.items.clear();
+
+      // Optional Toast
+      alert('✅ Playlist created!');
+    });
   }
+}
+
 }
