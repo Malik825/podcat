@@ -5,8 +5,8 @@
   <div *ngIf="loading" class="status loading">Loading...</div>
   <div *ngIf="error" class="status error">{{ error }}</div>
 
-  <div *ngIf="!loading && episodes.length > 0" class="episode-grid">
-    <div *ngFor="let episode of episodes" class="episode-card">
+  <div *ngIf="!loading && episodeService.episodes()" class="episode-grid">
+    <div *ngFor="let episode of episodeService.episodes()" class="episode-card">
       <app-playlist-card [episode]="episode"></app-playlist-card>
       <!-- <div class="image-container">
         <img [src]="episode.img_url" [alt]="episode.title" />

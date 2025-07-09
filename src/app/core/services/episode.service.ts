@@ -1,15 +1,15 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { Episode } from '../../models/episode.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class EpisodeService {
   private baseUrl = `${environment.apiUrl}/episodes`;
-
+  episodes = signal<Episode[]>([]);
   constructor(private http: HttpClient) {}
 
   // Fetch all episodes (with optional pagination if API supports it)
@@ -18,8 +18,12 @@ export class EpisodeService {
   }
 
   // Fetch a single episode by ID
-  getEpisode(id: number): Observable<{ status: string; data: Episode }> {
-    return this.http.get<{ status: string; data: Episode }>(`${this.baseUrl}/${id}`);
+  getEpisodeDetails(id: string): Episode | undefined {
+    const filteredEpisode = this.episodes().find(
+      (eps) => eps.id === Number(id)
+    );
+
+    return filteredEpisode;
   }
 
   // Create new episode

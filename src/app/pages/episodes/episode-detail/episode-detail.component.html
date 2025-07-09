@@ -1,27 +1,32 @@
 <app-header></app-header>
-<app-mobile-admin-menu
+<!-- <app-mobile-admin-menu
   class="scroll-aware-menu"
   [menuItems]="menuItems"
-></app-mobile-admin-menu>
+></app-mobile-admin-menu> -->
 
 <!-- episode-detail.component.html -->
 <div class="episode-detail">
   <div class="episode-header">
-    <div class="episode-meta">
+    <!-- <div class="episode-meta">
       <span class="new-episode-dot"></span>
       <span class="new-episode-text">New Podcast Episode</span>
-    </div>
-    <h1 class="episode-title">Separated For The Better | Joel Osteen</h1>
-    <div class="podcast-info">
+    </div> -->
+    <h1 class="episode-title">{{ selectedEpisode.title }}</h1>
+    <!-- <div class="podcast-info">
       <img
-        src="https://randomuser.me/api/portraits/men/32.jpg"
+        src="{{ selectedEpisode?.img_url }}"
         alt="Joel Osteen"
         class="podcast-avatar"
       />
       <span class="podcast-name">Joel Osteen Podcast</span>
-    </div>
+    </div> -->
     <div class="episode-time">
-      <span>Today • 31 min 4 sec</span>
+      <span
+        >{{ selectedEpisode.posted_on }} •
+        {{ selectedEpisode.duration.split(":")[0] }}hr:{{
+          selectedEpisode.duration.split(":")[1]
+        }}min:{{ selectedEpisode.duration.split(":")[2] }}sec</span
+      >
     </div>
     <div class="episode-controls">
       <button class="play-btn" aria-label="Play"><span>▶</span></button>
@@ -32,12 +37,12 @@
   <div class="episode-description-section">
     <h2>Episode Description</h2>
     <p class="episode-description">
-      God uses pruning seasons to prepare us for the future. He won’t allow you
-      to lose anything without gaining something better.<br />
-      message of God’s hope and love. To give visit
-      <span class="show-more">... Show more</span>
+      {{ selectedEpisode.description }}
+      <!-- <span class="show-more">... Show more</span> -->
     </p>
-    <button class="see-all-btn">See all episodes</button>
+    <button class="see-all-btn" (click)="goToAllEpisodes()">
+      See all episodes
+    </button>
   </div>
   <div class="comments-section">
     <h2>Comments</h2>
@@ -54,7 +59,27 @@
         class="comment-input"
       />
     </div>
-    <div class="platform-rules">Read our <a href="#">Platform Rules</a></div>
     <div class="no-comments">Be the first to leave a comment.</div>
+  </div>
+  <div class="custom-audio-player">
+    <div class="audio-meta">
+      <img class="audio-cover" [src]="selectedEpisode.img_url" />
+      <div class="audio-info">
+        <div class="audio-title">{{ selectedEpisode.title }}</div>
+        <!-- <div class="audio-artist">{{ selectedEpisode. || 'Artist Name' }}</div> -->
+      </div>
+      <button class="audio-add-btn" aria-label="Add to playlist">+</button>
+    </div>
+    <div class="audio-controls-row">
+      <span class="audio-time">0:02</span>
+      <input type="range" class="audio-progress" min="0" max="222" value="2" />
+      <!-- <span class="audio-time">3:42</span> -->
+    </div>
+    <div class="audio-controls">
+      <!-- <button class="audio-btn" aria-label="Shuffle"><span>🔀</span></button> -->
+      <button class="audio-btn" aria-label="Previous"><span>⏮</span></button>
+      <button class="audio-btn play" aria-label="Play"><span>▶</span></button>
+      <button class="audio-btn" aria-label="Next"><span>⏭</span></button>
+    </div>
   </div>
 </div>

@@ -27,12 +27,13 @@ export class EpisodesListComponent implements OnInit {
   loading = true;
   error = '';
 
-  constructor(private episodeService: EpisodeService) {}
+  constructor(public episodeService: EpisodeService) {}
 
   ngOnInit(): void {
     this.episodeService.getEpisodes().subscribe({
       next: (res) => {
-        this.episodes = res.data;
+        // this.episodes = res.data;
+        this.episodeService.episodes.set(res.data);
         this.loading = false;
       },
       error: (err) => {
