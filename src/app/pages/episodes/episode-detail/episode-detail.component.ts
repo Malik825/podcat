@@ -1,16 +1,11 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-
+import { HeaderComponent } from '../../../shared/components/header/header.component';
 import { EpisodeService } from '../../../core/services/episode.service';
 import { Episode } from '../../../models/episode.model';
 import { MobileAdminMenuComponent } from '../../../shared/components/mobile-admin-menu/mobile-admin-menu.component';
-import {
-  Home,
-  Play,
-  List,
-  MessageSquare
-} from 'lucide-angular';
+import { Home, Play, List, MessageSquare } from 'lucide-angular';
 
 @Component({
   selector: 'app-episode-detail',
@@ -18,17 +13,18 @@ import {
   imports: [
     CommonModule,
     RouterModule,
-    MobileAdminMenuComponent
+    MobileAdminMenuComponent,
+    HeaderComponent,
   ],
   templateUrl: './episode-detail.component.html',
-  styleUrls: ['./episode-detail.component.scss']
+  styleUrls: ['./episode-detail.component.scss'],
 })
 export class EpisodeDetailComponent implements OnInit {
   menuItems = [
     { label: 'Home', icon: Home, route: ['/'] },
     { label: 'Episodes', icon: Play, route: ['/episodes'] },
     { label: 'Playlists', icon: List, route: ['/playlists'] },
-    { label: 'Confess', icon: MessageSquare, route: ['/confessions'] }
+    { label: 'Confess', icon: MessageSquare, route: ['/confessions'] },
   ];
 
   episode = signal<Episode | null>(null);
@@ -46,23 +42,21 @@ export class EpisodeDetailComponent implements OnInit {
 
     if (idOrSlug) {
       console.log('[EpisodeDetail] Fetching episode from API...');
-     this.episodeService.getEpisodes().subscribe({
-  next: (res) => {
-    const episode = res.data.find(ep => ep.id === Number(idOrSlug));
-    if (episode) {
-      this.episode.set(episode);
-    } else {
-      this.error.set('Episode not found');
-    }
-    this.loading.set(false);
-  },
-  error: () => {
-    this.error.set('Failed to fetch episodes');
-    this.loading.set(false);
-  }
-});
-
-
+      this.episodeService.getEpisodes().subscribe({
+        next: (res) => {
+          const episode = res.data.find((ep) => ep.id === Number(idOrSlug));
+          if (episode) {
+            this.episode.set(episode);
+          } else {
+            this.error.set('Episode not found');
+          }
+          this.loading.set(false);
+        },
+        error: () => {
+          this.error.set('Failed to fetch episodes');
+          this.loading.set(false);
+        },
+      });
     } else {
       console.warn('[EpisodeDetail] No valid ID or slug found in route.');
       this.error.set('Invalid episode ID');

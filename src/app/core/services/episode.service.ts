@@ -9,6 +9,7 @@ import { Episode } from '../../models/episode.model';
 })
 export class EpisodeService {
   private baseUrl = `${environment.apiUrl}/episodes`;
+  episodes = signal<Episode[]>([]);
   constructor(private http: HttpClient) {}
 
   // Fetch all episodes (with optional pagination if API supports it)
