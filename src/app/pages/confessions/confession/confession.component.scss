@@ -1,23 +1,160 @@
 .scroll-aware-menu {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    border-top: 1px solid var(--accent);
-    z-index: 1000;
-    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
-  
-    &.hide {
-      transform: translateY(100%);
-      opacity: 0;
-    }
-  
-    &.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  
-    @media (min-width: 768px) {
-      display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid var(--accent);
+  z-index: 1000;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+
+  &.hide {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  &.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+
+.confession-container {
+  max-width: 600px;
+  margin: 40px auto 0 auto;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.confession-title {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.confession-subtitle {
+  text-align: center;
+  color: #555;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.confession-form-card {
+  background: var(--background);
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
+  padding: 2rem 1.5rem;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  color: var(--foreground);
+}
+
+.form-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.form-desc {
+  color: #888;
+  font-size: 0.95rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.2rem;
+
+  label {
+    font-weight: 500;
+    margin-bottom: 0.3rem;
+    font-size: 1rem;
+  }
+
+  input,
+  textarea {
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 0.7rem 1rem;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s;
+    background: var(--background);
+    color: var(--foreground);
+    resize: none;
+
+    &:focus {
+      border-color: #a3bffa;
+      // background: #fff;
     }
   }
+}
+
+.input-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  input {
+    width: 100%;
+    padding-right: 2.2rem;
+  }
+
+  .icon-lock {
+    position: absolute;
+    right: 0.8rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.1rem;
+    height: 1.1rem;
+    background: url('data:image/svg+xml;utf8,<svg fill="none" stroke="gray" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><rect width="14" height="8" x="5" y="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>')
+      no-repeat center/contain;
+    pointer-events: none;
+    opacity: 0.7;
+  }
+}
+
+.submit-btn {
+  width: 100%;
+  background: #a3bffa;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 6px;
+  padding: 0.9rem 0;
+  margin-top: 0.5rem;
+  cursor: pointer;
+  transition: background 0.2s;
+
+  &:hover,
+  &:focus {
+    background: #7f9cf5;
+  }
+}
+
+.error {
+  color: var(--destructive);
+}
+
+@media (max-width: 600px) {
+  .confession-container {
+    padding: 8px;
+  }
+  .confession-form-card {
+    padding: 1.2rem 0.5rem;
+  }
+  .confession-title {
+    font-size: 1.3rem;
+  }
+}

@@ -1,5 +1,77 @@
 <app-header></app-header>
-<p>confession works!</p>
+<!-- form to create confession -->
+
+<div class="confession-container">
+  <h1 class="confession-title">Got something on your mind?</h1>
+  <p class="confession-subtitle">
+    Share your anonymous confession and it could be spotlighted in an upcoming
+    episode of our podcast.
+  </p>
+  <div class="confession-form-card">
+    <h2 class="form-title">Submit Confession</h2>
+    <p class="form-desc">
+      All fields are optional. Your confession will be reviewed before being
+      featured.
+    </p>
+    <form [formGroup]="confessionForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="name">Name (Optional)</label>
+        <input formControlName="name" type="text" placeholder="Your name" />
+      </div>
+      <div class="form-group">
+        <label for="email">Email (Optional)</label>
+        <div class="input-icon">
+          <input
+            formControlName="email"
+            type="email"
+            placeholder="your@email.com"
+          />
+          <span class="icon-lock" aria-label="lock"></span>
+        </div>
+        <small
+          class="error"
+          *ngIf="
+            confessionForm.get('email')?.invalid &&
+            confessionForm.get('email')?.touched
+          "
+        >
+          Please enter a valid email address.
+        </small>
+      </div>
+      <div class="form-group">
+        <label for="confession">Your Confession</label>
+        <textarea
+          id="confession"
+          formControlName="message"
+          rows="5"
+          placeholder="Share your story..."
+        ></textarea>
+        <div
+          class="error"
+          *ngIf="
+            confessionForm.get('message')?.errors &&
+            confessionForm.get('message')?.touched
+          "
+        >
+          <small *ngIf="confessionForm.get('message')?.errors?.['required']">
+            Confession is required.
+          </small>
+          <small *ngIf="confessionForm.get('message')?.errors?.['minlength']">
+            Confession must be at least 10 characters.
+          </small>
+        </div>
+      </div>
+      <button
+        type="submit"
+        class="submit-btn"
+        [disabled]="confessionForm.invalid"
+      >
+        {{ isCreated ? "Creating Confession..." : "Submit Confession" }}
+      </button>
+    </form>
+  </div>
+</div>
+<!-- form to create confession -->
 <app-mobile-admin-menu
   class="scroll-aware-menu"
   [menuItems]="menuItems"
