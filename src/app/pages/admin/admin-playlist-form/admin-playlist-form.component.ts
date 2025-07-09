@@ -13,7 +13,7 @@ import { CommonModule } from '@angular/common';
 import { Playlist } from '../../../models/playlist.model';
 import { Episode } from '../../../models/episode.model';
 
-// ✅ Angular Material
+// Angular Material
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -28,7 +28,6 @@ import { MatIconModule } from '@angular/material/icon';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    // ✅ Angular Material modules
     MatFormFieldModule,
     MatInputModule,
     MatSelectModule,
@@ -58,29 +57,43 @@ export class AdminPlaylistFormComponent implements OnInit {
       title: ['', Validators.required],
       description: [''],
       featured: [false],
-      episodes: [[]], // ✅ Multi-select episode IDs
-      items: this.fb.array([]) // ✅ Playlist segments
+      episodes: [[]],
+      items: this.fb.array([])
     });
   }
 
   ngOnInit(): void {
-    this.episodeService.getEpisodes().subscribe(res => {
-      this.episodes.set(res.data);
+    this.episodeService.getEpisodes().subscribe({
+      next: (res) => this.episodes.set(res.data),
+      error: () => console.warn('❌ Failed to load episodes')
     });
 
     const id = this.route.snapshot.paramMap.get('id');
     if (id) {
       this.editing.set(true);
       this.playlistId = +id;
-      this.playlistService.getPlaylist(id).subscribe(res => {
-        const data = res.data;
-        this.playlistForm.patchValue(data);
 
-        if (data.items?.length) {
-          data.items.forEach((item: string) => this.items.push(this.fb.control(item)));
+      this.playlistService.getPlaylist(id).subscribe({
+        next: (res) => {
+          const data = res.data;
+          this.playlistForm.patchValue({
+            title: data.name, // Backend uses `name`
+            description: data.description,
+            featured: data.featured,
+            episodes: data.episodes || []
+
+          });
+
+          if (data.items?.length) {
+            data.items.forEach((item: string) => this.items.push(this.fb.control(item)));
+          }
+
+          this.loading.set(false);
+        },
+        error: () => {
+          console.warn('❌ Failed to fetch playlist');
+          this.loading.set(false);
         }
-
-        this.loading.set(false);
       });
     } else {
       this.loading.set(false);
@@ -103,26 +116,47 @@ export class AdminPlaylistFormComponent implements OnInit {
     this.items.removeAt(index);
   }
 
- onSubmit(): void {
-  const formValue = this.playlistForm.value;
+  onSubmit(): void {
+    const formValue = this.playlistForm.value;
 
-  const payload = {
-    name: formValue.title, // ✅ backend expects this
-    description: formValue.description,
-    featured: formValue.featured,
-    episodes: formValue.episodes,
-    items: formValue.items
-  };
+    const payload = {
+      name: formValue.title,
+      description: formValue.description,
+      featured: formValue.featured,
+      episodes: formValue.episodes,
+      items: formValue.items
+    };
 
-  if (this.isEdit) {
-    this.playlistService.updatePlaylist(this.playlistId!, payload).subscribe(() => {
-      this.router.navigate(['/admin/playlists']);
-    });
-  } else {
-    this.playlistService.createPlaylist(payload).subscribe(() => {
-      this.router.navigate(['/admin/playlists']);
-    });
+    console.log('📦 Payload:', payload);
+
+    if (this.isEdit) {
+      this.playlistService.updatePlaylist(this.playlistId!, payload).subscribe({
+        next: () => {
+          alert('✅ Playlist updated!');
+          this.router.navigate(['/admin/playlists']);
+        },
+        error: (err) => {
+          console.error('❌ Update failed:', err);
+          alert('Failed to update playlist. Check console for details.');
+        }
+      });
+    } else {
+      this.playlistService.createPlaylist(payload).subscribe({
+        next: () => {
+          alert('✅ Playlist created!');
+          this.playlistForm.reset({
+            title: '',
+            description: '',
+            featured: false,
+            episodes: []
+          });
+          this.items.clear();
+        },
+        error: (err) => {
+          console.error('❌ Creation failed:', err);
+          alert('Failed to create playlist. Check console for details.');
+        }
+      });
+    }
   }
-}
-
 }

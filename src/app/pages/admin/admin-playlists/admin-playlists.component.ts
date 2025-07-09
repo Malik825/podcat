@@ -36,13 +36,24 @@ export class AdminPlaylistsComponent implements OnInit {
     });
   }
 
-  deletePlaylist(id: number): void {
-    const confirmDelete = confirm('Are you sure you want to delete this playlist?');
-    if (!confirmDelete) return;
+deletePlaylist(id: number): void {
+  const confirmDelete = confirm('Are you sure you want to delete this playlist?');
+  if (!confirmDelete) return;
 
-    this.playlistService.deletePlaylist(id).subscribe({
-      next: () => this.fetchPlaylists(),
-      error: () => alert('Failed to delete playlist')
-    });
-  }
+  this.playlistService.deletePlaylist(id).subscribe({
+    next: () => {
+      console.log('✅ Playlist deleted');
+      this.fetchPlaylists();
+    },
+    error: (err) => {
+      console.error('❌ Failed to delete playlist:', err);
+      alert('Failed to delete playlist');
+    }
+  });
+}
+getPlaylistImage(id: number): string {
+  return `https://picsum.photos/seed/playlist-${id}/400/240`;
+}
+
+
 }

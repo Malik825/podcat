@@ -1,36 +1,57 @@
-<div class="panda-container">
-  <div class="panda">
-    <div class="ear"></div>
-    <div class="face">
-      <div class="eye-shade"></div>
-      <div class="eye-white"><div class="eye-ball"></div></div>
-      <div class="eye-shade rgt"></div>
-      <div class="eye-white rgt"><div class="eye-ball"></div></div>
-      <div class="nose"></div>
-      <div class="mouth"></div>
-    </div>
-    <div class="body"></div>
-    <div class="hand"></div>
-    <div class="hand rgt"></div>
-    <div class="foot"><div class="finger"></div></div>
-    <div class="foot rgt"><div class="finger"></div></div>
-  </div>
-</div>
+<div class="admin-playlist-form" *ngIf="!loading()">
+  <h2>{{ isEdit ? '✏️ Edit Playlist' : '➕ Create Playlist' }}</h2>
 
-<!-- Form Card -->
-<div class="admin-playlist-form">
-  <h2>Panda Login</h2>
-  <form>
-    <div class="form-group">
-      <input type="text" class="form-control" required />
-      <label class="form-label">Username</label>
+  <form [formGroup]="playlistForm" (ngSubmit)="onSubmit()">
+    <!-- Title -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Playlist Title</mat-label>
+      <input matInput formControlName="title" placeholder="Enter playlist title" />
+    </mat-form-field>
+
+    <!-- Description -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Description</mat-label>
+      <textarea matInput formControlName="description" placeholder="Enter description"></textarea>
+    </mat-form-field>
+
+    <!-- Episodes Multi-Select -->
+    <mat-form-field appearance="fill" class="full-width">
+      <mat-label>Episodes</mat-label>
+      <mat-select formControlName="episodes" multiple>
+        <mat-option *ngFor="let ep of episodes()" [value]="ep.id">
+          {{ ep.title }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Featured Checkbox -->
+    <mat-checkbox formControlName="featured">Mark as Featured</mat-checkbox>
+
+    <!-- Playlist Segments -->
+    <div class="segment-section">
+      <h3>Segments</h3>
+      <div formArrayName="items">
+        <div *ngFor="let itemCtrl of items.controls; let i = index" class="segment-row">
+          <mat-form-field class="segment-input" appearance="fill">
+            <mat-label>Segment {{ i + 1 }}</mat-label>
+            <input matInput [formControlName]="i" />
+          </mat-form-field>
+          <button mat-icon-button color="warn" type="button" (click)="removeItem(i)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
+
+      <button mat-stroked-button color="primary" type="button" (click)="addItem()">
+        ➕ Add Segment
+      </button>
     </div>
-    <div class="form-group">
-      <input type="password" class="form-control" required />
-      <label class="form-label">Password</label>
-    </div>
+
+    <!-- Submit -->
     <div class="form-actions">
-      <button class="btn">Login</button>
+      <button mat-raised-button color="accent" type="submit" [disabled]="playlistForm.invalid">
+        {{ isEdit ? 'Update Playlist' : 'Create Playlist' }}
+      </button>
     </div>
   </form>
 </div>

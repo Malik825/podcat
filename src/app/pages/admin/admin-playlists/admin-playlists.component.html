@@ -1,7 +1,7 @@
 <div class="admin-playlists">
   <div class="header">
     <h2>📂 All Playlists</h2>
-    <a routerLink="/admin/playlists/new" class="btn-new"> ➕ New Playlist </a>
+    <a routerLink="/admin/playlists/new" class="btn-new">➕ New Playlist</a>
   </div>
 
   <div *ngIf="loading()" class="loading">Loading playlists...</div>
@@ -9,18 +9,23 @@
 
   <div *ngIf="!loading() && playlists().length > 0" class="playlist-grid">
     <div *ngFor="let playlist of playlists()" class="playlist-card">
-      <h3>{{ playlist.name }}</h3>
-      <p>{{ playlist.description }}</p>
-
-      <div class="actions">
-        <a
-          [routerLink]="['/admin/playlists', playlist.id, 'edit']"
-          class="btn-edit"
-          >✏️ Edit</a
-        >
-        <button (click)="deletePlaylist(playlist.id)" class="btn-delete">
-          🗑️ Delete
-        </button>
+      <div class="card-header">
+        <img [src]="getPlaylistImage(playlist.id)" alt="Playlist cover" class="cover-img" />
+        <button class="btn-follow">+</button>
+      </div>
+      <div class="card-body">
+        <h3>{{ playlist.name }}</h3>
+        <p class="username">&copy;{{ playlist.name | lowercase }}</p>
+        <p class="role">Playlist Creator</p>
+        <div class="stats">
+          <span>17 <small>Shots</small></span>
+          <span>143 <small>Following</small></span>
+          <span>57 <small>Followers</small></span>
+        </div>
+        <div class="actions">
+          <a  [routerLink]="['/admin/playlists', playlist.id, 'edit']" class="btn-message">✏️ Edit</a>
+          <button  (click)="deletePlaylist(playlist.id)" class="btn-more">🗑️ Delete</button>
+        </div>
       </div>
     </div>
   </div>

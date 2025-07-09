@@ -26,11 +26,11 @@ export class AdminDashboardComponent implements OnInit {
   totalEpisodes = signal(0);
   totalTeam = signal(0);
 
-  // Donut chart data
+  // Donut chart
   donutSeries: number[] = [];
   donutLabels: string[] = [];
 
-  // Line chart data
+  // Line chart
   lineSeries: ApexAxisChartSeries = [];
   lineChartOptions: ApexChart = {
     type: 'line',
@@ -50,6 +50,11 @@ export class AdminDashboardComponent implements OnInit {
     const user = this.authService.getUser();
     this.userName.set(user?.name || 'Admin');
 
+    this.loadEpisodes();
+    this.loadTeam();
+  }
+
+  private loadEpisodes(): void {
     this.episodeService.getEpisodes().subscribe({
       next: (res) => {
         const episodes = res.data;
@@ -59,10 +64,10 @@ export class AdminDashboardComponent implements OnInit {
         const dateMap: Record<string, number> = {};
 
         episodes.forEach((ep) => {
-          // Donut chart data: group by season
+          // Donut chart data: by season
           seasonMap[ep.season] = (seasonMap[ep.season] || 0) + 1;
 
-          // Line chart data: group by date
+          // Line chart data: by posted date
           const date = new Date(ep.posted_on).toLocaleDateString();
           dateMap[date] = (dateMap[date] || 0) + 1;
         });
@@ -78,12 +83,14 @@ export class AdminDashboardComponent implements OnInit {
           }
         ];
       },
-      error: () => console.warn('Failed to fetch episodes')
+      error: () => console.warn('❌ Failed to load episodes')
     });
+  }
 
+  private loadTeam(): void {
     this.teamService.getTeamMembers().subscribe({
       next: (res) => this.totalTeam.set(res.data.length),
-      error: () => console.warn('Failed to fetch team members')
+      error: () => console.warn('❌ Failed to load team members')
     });
   }
 }

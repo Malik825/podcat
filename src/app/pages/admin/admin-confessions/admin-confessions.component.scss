@@ -1,12 +1,14 @@
+@use '../../../../styles/variables' as *;
+
 .admin-confessions {
   max-width: 1200px;
   margin: 0 auto;
   padding: 2rem;
-  font-family: 'Arial', sans-serif;
+  font-family: var(--font-sans); // Using Noto Sans as default, can switch to Poppins if preferred
 
   h2 {
     font-size: 2rem;
-    color: #333;
+    color: var(--foreground);
     margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
@@ -20,19 +22,19 @@
   .status {
     padding: 1rem;
     margin-bottom: 1rem;
-    border-radius: 8px;
+    border-radius: var(--radius);
     text-align: center;
 
     &.error {
-      background-color: #ffebee;
-      color: #c62828;
-      border: 1px solid #ef9a9a;
+      background-color: var(--destructive);
+      color: var(--destructive-foreground);
+      border: 1px solid (var(--destructive), 10%);
     }
 
     &.empty {
-      background-color: #fff3e0;
-      color: #ef6c00;
-      border: 1px solid #ffcc80;
+      background-color: var(--muted);
+      color: var(--muted-foreground);
+      border: 1px solid var(--border);
     }
   }
 
@@ -43,19 +45,21 @@
       width: 100%;
       max-width: 300px;
       padding: 0.75rem 1rem;
-      border: 2px solid #ddd;
+      border: 2px solid var(--border);
       border-radius: 25px;
       font-size: 1rem;
       transition: border-color 0.3s ease;
+      background-color: var(--input);
+      color: var(--foreground);
 
       &:focus {
         outline: none;
-        border-color: #1976d2;
-        box-shadow: 0 0 5px rgba(25, 118, 210, 0.5);
+        border-color: var(--primary);
+        box-shadow: 0 0 5px rgba(var(--primary-rgb), 0.5);
       }
 
       &::placeholder {
-        color: #888;
+        color: var(--muted-foreground);
       }
     }
   }
@@ -65,9 +69,9 @@
     padding: 0;
 
     li {
-      background-color: #fff;
-      border: 1px solid #eee;
-      border-radius: 10px;
+      background-color: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
       padding: 1.5rem;
       margin-bottom: 1rem;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
@@ -80,7 +84,7 @@
 
       .message {
         font-size: 1.1rem;
-        color: #444;
+        color: var(--card-foreground);
         margin-bottom: 1rem;
         line-height: 1.5;
         quotes: '“' '”' '‘' '’';
@@ -91,7 +95,7 @@
           content: open-quote;
           position: absolute;
           left: 0;
-          color: #1976d2;
+          color: var(--primary);
           font-size: 1.5rem;
         }
       }
@@ -103,8 +107,8 @@
         flex-wrap: wrap;
 
         .pill {
-          background-color: #e3f2fd;
-          color: #1976d2;
+          background-color: var(--accent);
+          color: var(--accent-foreground);
           padding: 0.25rem 0.75rem;
           border-radius: 12px;
           font-size: 0.9rem;
@@ -120,20 +124,20 @@
           transition: background-color 0.3s ease;
 
           &.approved {
-            background-color: #4caf50;
-            color: white;
+            background-color: var(--secondary);
+            color: var(--secondary-foreground);
 
             &:hover {
-              background-color: #45a049;
+              background-color: (var(--secondary), 10%);
             }
           }
 
           &:not(.approved) {
-            background-color: #f44336;
-            color: white;
+            background-color: var(--destructive);
+            color: var(--destructive-foreground);
 
             &:hover {
-              background-color: #da190b;
+              background-color: (var(--destructive), 10%);
             }
           }
         }
@@ -143,7 +147,7 @@
         display: flex;
         justify-content: space-between;
         align-items: center;
-        color: #757575;
+        color: var(--muted-foreground);
 
         .timestamp {
           font-size: 0.9rem;
@@ -152,13 +156,13 @@
         .delete-btn {
           background: none;
           border: none;
-          color: #f44336;
+          color: var(--destructive);
           font-size: 1rem;
           cursor: pointer;
           transition: color 0.3s ease;
 
           &:hover {
-            color: #d32f2f;
+            color: (var(--destructive), 10%);
           }
         }
       }

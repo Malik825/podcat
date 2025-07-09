@@ -1,137 +1,205 @@
 @use '../../../../styles/variables' as *;
-.admin-playlists {
-  h2 {
-    margin-bottom: 1rem;
-  }
 
-  .actions {
-    margin-bottom: 1rem;
-  }
-
-  .playlist-table {
-    width: 100%;
-    border-collapse: collapse;
-
-    th, td {
-      border: 1px solid #333;
-      padding: 0.75rem;
-      text-align: left;
-    }
-
-    th {
-      background-color: #222;
-    }
-
-    td button {
-      background: none;
-      border: none;
-      color: red;
-      cursor: pointer;
-    }
-
-    td a {
-      margin-right: 1rem;
-    }
-  }
-
-  .status {
-    color: gray;
-    margin-top: 1rem;
-    &.error {
-      color: red;
-    }
-    &.empty {
-      font-style: italic;
-    }
-  }
-}
 .admin-playlists {
   padding: 2rem;
+  background-color: var(--background); // Adapts to light/dark theme
+
+  h2 {
+    margin-bottom: 1.5rem;
+    font-size: 1.8rem;
+    font-family: var(--font-poppins);
+    color: var(--foreground);
+    text-align: center;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 0.5rem;
+  }
 
   .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1.5rem;
-
-    h2 {
-      font-size: 1.5rem;
-      font-family: var(--font-poppins);
-      color: var(--foreground);
-    }
+    margin-bottom: 2.5rem;
+    flex-wrap: wrap;
 
     .btn-new {
       background-color: var(--primary);
       color: var(--primary-foreground);
       padding: 0.5rem 1rem;
       border-radius: var(--radius);
-      text-decoration: none;
       font-weight: 500;
-      transition: background 0.2s ease;
       font-family: var(--font-poppins);
+      text-decoration: none;
+      transition: background 0.2s ease;
 
       &:hover {
-        background-color: (var(--primary), 5%);
+        background-color: (var(--primary), 10%);
       }
     }
   }
 
   .playlist-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
   }
 
   .playlist-card {
     background: var(--card);
-    border: 1px solid var(--border);
     border-radius: var(--radius);
-    padding: 1rem;
-    color: var(--foreground);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+    border: 1px solid var(--border);
 
-    h3 {
-      margin-bottom: 0.5rem;
-      font-weight: 600;
+    &:hover {
+      transform: translateY(-4px);
     }
 
-    p {
-      font-size: 0.9rem;
-      color: var(--muted-foreground);
-    }
+    .card-header {
+      position: relative;
+      padding: 1rem;
 
-    .actions {
-      display: flex;
-      justify-content: space-between;
-      margin-top: 1rem;
+      .cover-img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 2px solid var(--primary);
+      }
 
-      .btn-edit,
-      .btn-delete {
-        font-size: 0.9rem;
+      .btn-follow {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        width: 30px;
+        height: 30px;
+        background-color: var(--destructive);
+        color: var(--destructive-foreground);
         border: none;
-        background: transparent;
+        border-radius: 50%;
+        font-size: 1.2rem;
         cursor: pointer;
-        font-family: var(--font-poppins);
-        color: var(--primary);
-        text-decoration: none;
+        transition: background 0.2s ease;
 
         &:hover {
-          text-decoration: underline;
+          background-color: (var(--destructive), 10%);
+        }
+      }
+    }
+
+    .card-body {
+      padding: 1.5rem;
+      text-align: center;
+
+      h3 {
+        margin-bottom: 0.25rem;
+        font-weight: 600;
+        font-size: 1.2rem;
+        color: var(--card-foreground);
+      }
+
+      .username {
+        margin-bottom: 0.25rem;
+        font-size: 0.9rem;
+        color: var(--muted-foreground);
+      }
+
+      .role {
+        margin-bottom: 1rem;
+        font-size: 0.85rem;
+        color: var(--muted-foreground);
+      }
+
+      .stats {
+        display: flex;
+        justify-content: space-around;
+        margin-bottom: 1.5rem;
+        font-size: 0.9rem;
+        color: var(--foreground);
+
+        span {
+          display: flex;
+          flex-direction: column;
+
+          small {
+            font-size: 0.7rem;
+            color: var(--muted-foreground);
+          }
         }
       }
 
-      .btn-delete {
-        color: var(--destructive);
+      .actions {
+        display: flex;
+        justify-content: center;
+        gap: 1rem;
+        flex-wrap: wrap;
+
+        .btn-message {
+          padding: 0.75rem 1.5rem;
+          background-color: var(--primary); // Using primary for consistency, adjust if needed
+          color: var(--primary-foreground);
+          border: none;
+          border-radius: 20px;
+          font-size: 1rem;
+          font-family: var(--font-poppins);
+          cursor: pointer;
+          transition: background 0.2s ease;
+
+          &:hover {
+            background-color: (var(--primary), 10%);
+          }
+        }
+
+        .btn-more {
+          margin-top: 0.5rem;
+          font-size: 0.9rem;
+          color: var(--muted-foreground);
+          text-decoration: none;
+          font-family: var(--font-poppins);
+          transition: color 0.2s ease;
+
+          &:hover {
+            color: var(--primary);
+          }
+        }
+
+        .btn-edit {
+          font-size: 0.95rem;
+          font-family: var(--font-poppins);
+          border: none;
+          background: transparent;
+          cursor: pointer;
+          color: var(--primary);
+          padding: 0.25rem 0.5rem;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: (var(--primary), 10%);
+          }
+        }
+
+        .btn-delete {
+          font-size: 0.95rem;
+          font-family: var(--font-poppins);
+          border: none;
+          background: transparent;
+          cursor: pointer;
+          color: var(--destructive);
+          padding: 0.25rem 0.5rem;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: (var(--destructive), 10%);
+          }
+        }
       }
     }
   }
 
+  .playlist-table,
   .loading,
-  .empty,
-  .error {
-    text-align: center;
-    margin-top: 2rem;
-    font-family: var(--font-poppins);
-    color: var(--muted-foreground);
+  .error,
+  .empty {
+    display: none; // Hide table and states to focus on card design
   }
 }

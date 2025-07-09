@@ -1,7 +1,7 @@
 <div class="dashboard">
   <h2>👋 Welcome back, {{ userName() }}!</h2>
 
-  <!-- Stats -->
+  <!-- 🔢 Stats Grid -->
   <div class="stats-grid">
     <div class="stat-card">
       <h3>🎧 Total Episodes</h3>
@@ -13,18 +13,28 @@
     </div>
   </div>
 
-  <!-- Donut and Line Charts -->
+  <!-- 📊 Charts -->
   <div class="charts-grid">
+    <!-- 🍩 Donut Chart -->
     <div class="chart-box">
       <h3>🍩 Episodes by Season</h3>
       <apx-chart
         [series]="donutSeries"
         [chart]="{ type: 'donut' }"
         [labels]="donutLabels"
-        [responsive]="[{ breakpoint: 480, options: { chart: { width: 300 }, legend: { position: 'bottom' } } }]"
+        [responsive]="[
+          {
+            breakpoint: 480,
+            options: {
+              chart: { width: 300 },
+              legend: { position: 'bottom' }
+            }
+          }
+        ]"
       ></apx-chart>
     </div>
 
+    <!-- 📈 Line Chart -->
     <div class="chart-box">
       <h3>📈 Episodes Over Time</h3>
       <apx-chart
