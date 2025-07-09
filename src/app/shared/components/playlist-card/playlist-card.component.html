@@ -1,9 +1,9 @@
-<div class="image-container">
+<div class="image-container" (click)="onDetails(episode()?.id)">
   <img [src]="episode()?.img_url" [alt]="episode()?.title" />
   <span class="duration">{{ episode()?.duration }}</span>
 </div>
 
-<div class="card-body">
+<div class="card-body" (click)="onDetails(episode()?.id)">
   <h3 class="title">{{ episode()?.title }}</h3>
 
   <div class="meta">

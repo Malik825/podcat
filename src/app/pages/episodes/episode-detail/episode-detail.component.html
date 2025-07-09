@@ -1,5 +1,60 @@
-<p>episode-detail works!</p>
+<app-header></app-header>
 <app-mobile-admin-menu
   class="scroll-aware-menu"
   [menuItems]="menuItems"
 ></app-mobile-admin-menu>
+
+<!-- episode-detail.component.html -->
+<div class="episode-detail">
+  <div class="episode-header">
+    <div class="episode-meta">
+      <span class="new-episode-dot"></span>
+      <span class="new-episode-text">New Podcast Episode</span>
+    </div>
+    <h1 class="episode-title">Separated For The Better | Joel Osteen</h1>
+    <div class="podcast-info">
+      <img
+        src="https://randomuser.me/api/portraits/men/32.jpg"
+        alt="Joel Osteen"
+        class="podcast-avatar"
+      />
+      <span class="podcast-name">Joel Osteen Podcast</span>
+    </div>
+    <div class="episode-time">
+      <span>Today • 31 min 4 sec</span>
+    </div>
+    <div class="episode-controls">
+      <button class="play-btn" aria-label="Play"><span>▶</span></button>
+      <button class="icon-btn" aria-label="Download"><span>⭳</span></button>
+      <button class="icon-btn" aria-label="More"><span>⋯</span></button>
+    </div>
+  </div>
+  <div class="episode-description-section">
+    <h2>Episode Description</h2>
+    <p class="episode-description">
+      God uses pruning seasons to prepare us for the future. He won’t allow you
+      to lose anything without gaining something better.<br />
+      message of God’s hope and love. To give visit
+      <span class="show-more">... Show more</span>
+    </p>
+    <button class="see-all-btn">See all episodes</button>
+  </div>
+  <div class="comments-section">
+    <h2>Comments</h2>
+    <div class="comment-box">
+      <img
+        src="https://randomuser.me/api/portraits/men/32.jpg"
+        alt="User"
+        class="comment-avatar"
+      />
+      <input
+        type="text"
+        maxlength="500"
+        placeholder="Leave a comment"
+        class="comment-input"
+      />
+    </div>
+    <div class="platform-rules">Read our <a href="#">Platform Rules</a></div>
+    <div class="no-comments">Be the first to leave a comment.</div>
+  </div>
+</div>
