@@ -1,1 +1,36 @@
-<p>admin-confessions works!</p>
+<div class="admin-confessions">
+  <h2>📝 Confessions</h2>
+
+  <div *ngIf="loading()" class="status">Loading confessions...</div>
+  <div *ngIf="error()" class="status error">{{ error() }}</div>
+
+  <div *ngIf="!loading() && confessions().length === 0" class="status empty">
+    No confessions available.
+  </div>
+<div class="filters">
+  <input [(ngModel)]="searchTerm" placeholder="Search emotion or category" />
+</div>
+
+  <ul *ngIf="confessions().length > 0" class="confession-list">
+   <li *ngFor="let confession of filteredConfessions()">
+
+      <p class="message">"{{ confession.message }}"</p>
+      <div class="tags">
+        <span class="pill">Category: {{ confession.category }}</span>
+        <span class="pill">Emotion: {{ confession.emotion }}</span>
+       <button
+  (click)="toggleApproval(confession)"
+  class="btn-toggle"
+  [class.approved]="confession.is_approved"
+>
+  {{ confession.is_approved ? '✅ Unapprove' : '✔️ Approve' }}
+</button>
+
+      </div>
+      <div class="meta">
+        <span class="timestamp">{{ confession.created_at | date: 'medium' }}</span>
+        <button (click)="deleteConfession(confession.id)" class="delete-btn">🗑️ Delete</button>
+      </div>
+    </li>
+  </ul>
+</div>
