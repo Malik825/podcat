@@ -1,27 +1,27 @@
 .scroll-aware-menu {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    border-top: 1px solid var(--accent);
-    z-index: 1000;
-    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
-  
-    &.hide {
-      transform: translateY(100%);
-      opacity: 0;
-    }
-  
-    &.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  
-    @media (min-width: 768px) {
-      display: none;
-    }
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid var(--accent);
+  z-index: 1000;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+
+  &.hide {
+    transform: translateY(100%);
+    opacity: 0;
   }
-  .episodes-page {
+
+  &.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+.episodes-page {
   padding: 2rem;
   min-height: 100vh;
   background: linear-gradient(to bottom right, #1c1c1c, #000);
@@ -163,4 +163,8 @@
       }
     }
   }
+}
+
+.paginator-container {
+  margin-top: 20px;
 }

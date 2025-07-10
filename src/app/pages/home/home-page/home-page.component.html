@@ -27,10 +27,3 @@
     </div>
   </div>
 </section>
-<p-paginator
-  (onPageChange)="onPageChange($event)"
-  [first]="first"
-  [rows]="rows"
-  [totalRecords]="episodeService.episodes().length || 15"
-  [rowsPerPageOptions]="[5, 10, 15]"
-/>

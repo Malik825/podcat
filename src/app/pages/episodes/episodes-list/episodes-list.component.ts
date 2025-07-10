@@ -6,6 +6,7 @@ import { Home, Play, List, MessageSquare, Users } from 'lucide-angular';
 import { EpisodeService } from '../../../core/services/episode.service';
 import { Episode } from '../../../models/episode.model';
 import { RouterModule } from '@angular/router';
+import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 
 @Component({
   selector: 'app-episodes-list',
@@ -15,6 +16,7 @@ import { RouterModule } from '@angular/router';
     HeaderComponent,
     // MobileAdminMenuComponent,
     RouterModule,
+    PaginatorModule,
   ],
   templateUrl: './episodes-list.component.html',
   styleUrls: ['./episodes-list.component.scss'],
@@ -28,6 +30,10 @@ export class EpisodesListComponent implements OnInit {
     { label: 'Team', icon: Users, route: ['/team'] },
   ];
 
+  first = 0;
+  rows = 10;
+
+  episodes = signal<Episode[]>([]);
   loading = signal(true);
   error = signal<string | null>(null);
 
@@ -36,7 +42,7 @@ export class EpisodesListComponent implements OnInit {
   ngOnInit(): void {
     this.episodeService.getEpisodes().subscribe({
       next: (res: { status: string; data: Episode[] }) => {
-        this.episodeService.episodes.set(res.data);
+        this.episodes.set(res.data);
         this.loading.set(false);
       },
       error: (err: unknown) => {
@@ -44,5 +50,10 @@ export class EpisodesListComponent implements OnInit {
         this.loading.set(false);
       },
     });
+  }
+
+  onPageChange(event: PaginatorState) {
+    this.first = event.first ?? 0;
+    this.rows = event.rows ?? 10;
   }
 }

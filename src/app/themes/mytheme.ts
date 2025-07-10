@@ -666,14 +666,14 @@ export const MyPreset = definePreset(Material, {
       colorScheme: {
         light: {
           root: {
-            background: '{surface.0}',
+            background: 'inherit',
             color: '{surface.700}',
             borderRadius: 0,
           },
         },
         dark: {
           root: {
-            background: '{surface.900}',
+            background: 'inherit',
             color: '{surface.0}',
             borderRadius: 0,
           },
