@@ -15,7 +15,7 @@ import { EpisodeCardComponent } from '../../../shared/components/episode-card/ep
   imports: [
     CommonModule,
     HeaderComponent,
-    // MobileAdminMenuComponent,
+    MobileAdminMenuComponent,
     RouterModule,
     PaginatorModule,
     EpisodeCardComponent,

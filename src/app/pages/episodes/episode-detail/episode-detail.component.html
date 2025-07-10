@@ -1,5 +1,8 @@
-<app-mobile-admin-menu [menuItems]="menuItems" />
-
+<app-mobile-admin-menu
+  class="scroll-aware-menu"
+  [menuItems]="menuItems"
+></app-mobile-admin-menu>
+<app-header></app-header>
 <div class="episode-detail-page" *ngIf="!loading() && episode()">
   <h2 class="title">{{ episode()?.title }}</h2>
 
