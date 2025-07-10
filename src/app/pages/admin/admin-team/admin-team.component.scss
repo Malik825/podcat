@@ -166,7 +166,9 @@
         }
 
         &.trash {
-          color: var(--destructive-foreground);
+          color: var(--accent-foreground);
+
+          // color: var(--destructive-foreground);
 
           &:hover {
             background: var(--destructive);
