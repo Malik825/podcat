@@ -1,15 +1,16 @@
+<app-header></app-header>
 <div class="episodes-page">
   <h2 class="page-title">🎙️ Latest Podcast Episodes</h2>
 
   <div *ngIf="loading()" class="status loading">Loading...</div>
   <div *ngIf="error()" class="status error">{{ error() }}</div>
 
-  <div *ngIf="!loading() && episodes().length > 0" class="episode-grid">
+  <div *ngIf="!loading() && episodes()" class="episode-grid">
     <a
       *ngFor="let episode of episodes()"
       class="episode-card"
       [routerLink]="['/episodes', episode.id]"
-      style="text-decoration: none; color: inherit;"
+      style="text-decoration: none; color: inherit"
     >
       <div class="image-container">
         <img [src]="episode.img_url" [alt]="episode.title" />
@@ -22,7 +23,9 @@
         <div class="meta">
           <span class="pill">S{{ episode.season }}</span>
           <span class="pill">E{{ episode.episode }}</span>
-          <span class="date">Posted {{ episode.posted_on | date:'mediumDate' }}</span>
+          <span class="date"
+            >Posted {{ episode.posted_on | date : "mediumDate" }}</span
+          >
         </div>
 
         <p class="description">{{ episode.description }}</p>
@@ -38,6 +41,15 @@
         </div>
       </div>
     </a>
+  </div>
+  <div class="paginator-container" *ngIf="!loading()">
+    <p-paginator
+      (onPageChange)="onPageChange($event)"
+      [first]="first"
+      [rows]="rows"
+      [totalRecords]="episodes().length || 15"
+      [rowsPerPageOptions]="[5, 10, 15]"
+    />
   </div>
 
   <div *ngIf="!loading() && episodes().length === 0" class="status empty">

@@ -1,6 +1,6 @@
 export interface Playlist {
   id: number;
-  title: string;
+  name: string;
   description: string;
   slug: string;
   featured: boolean;

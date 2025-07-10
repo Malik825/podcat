@@ -17,14 +17,27 @@
     <p><strong>Episode:</strong> {{ episode()?.episode }}</p>
     <p><strong>Duration:</strong> {{ episode()?.duration }}</p>
     <p><strong>Posted on:</strong> {{ episode()?.posted_on | date }}</p>
-    <p><strong>Featured:</strong> {{ episode()?.featured === '1' ? 'Yes' : 'No' }}</p>
+    <p>
+      <strong>Featured:</strong>
+      {{ episode()?.featured === "1" ? "Yes" : "No" }}
+    </p>
   </div>
 
   <div class="links">
-    <a *ngIf="episode()?.spotify_url" [href]="episode()?.spotify_url" target="_blank">Spotify</a>
-    <a *ngIf="episode()?.apple_podcasts_url" [href]="episode()?.apple_podcasts_url" target="_blank">Apple</a>
+    <a
+      *ngIf="episode()?.spotify_url"
+      [href]="episode()?.spotify_url"
+      target="_blank"
+      >Spotify</a
+    >
+    <a
+      *ngIf="episode()?.apple_podcasts_url"
+      [href]="episode()?.apple_podcasts_url"
+      target="_blank"
+      >Apple</a
+    >
   </div>
 </div>
 
-<div *ngIf="loading()" class="loading">Loading episode...</div>
+<div *ngIf="loading()" class="loading">Loading...</div>
 <div *ngIf="error()" class="error">{{ error() }}</div>
