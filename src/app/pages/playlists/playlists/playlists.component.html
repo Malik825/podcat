@@ -6,7 +6,11 @@
   <div *ngIf="error()" class="status error">{{ error() }}</div>
 
   <div *ngIf="!loading() && playlists().length > 0" class="playlist-grid">
-    <div *ngFor="let playlist of playlists()" class="playlist-card">
+    <div
+      *ngFor="let playlist of playlists(); let i = index"
+      class="playlist-card"
+      [ngClass]="getColorClass(i)"
+    >
       <h3>{{ playlist.name }}</h3>
       <p>{{ playlist.description }}</p>
       <p>🎧 Episodes: {{ playlist.episodes.length }}</p>

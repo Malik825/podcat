@@ -7,6 +7,7 @@ import { EpisodeService } from '../../../core/services/episode.service';
 import { Episode } from '../../../models/episode.model';
 import { RouterModule } from '@angular/router';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
+import { EpisodeCardComponent } from '../../../shared/components/episode-card/episode-card.component';
 
 @Component({
   selector: 'app-episodes-list',
@@ -17,6 +18,7 @@ import { PaginatorModule, PaginatorState } from 'primeng/paginator';
     // MobileAdminMenuComponent,
     RouterModule,
     PaginatorModule,
+    EpisodeCardComponent,
   ],
   templateUrl: './episodes-list.component.html',
   styleUrls: ['./episodes-list.component.scss'],
@@ -33,7 +35,6 @@ export class EpisodesListComponent implements OnInit {
   first = 0;
   rows = 10;
 
-  episodes = signal<Episode[]>([]);
   loading = signal(true);
   error = signal<string | null>(null);
 
@@ -42,7 +43,7 @@ export class EpisodesListComponent implements OnInit {
   ngOnInit(): void {
     this.episodeService.getEpisodes().subscribe({
       next: (res: { status: string; data: Episode[] }) => {
-        this.episodes.set(res.data);
+        this.episodeService.episodes.set(res.data);
         this.loading.set(false);
       },
       error: (err: unknown) => {

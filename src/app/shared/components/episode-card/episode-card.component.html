@@ -1,1 +1,34 @@
-<p>episode-card works!</p>
+<a
+  class="episode-card"
+  [routerLink]="['/episodes', episode.id]"
+  style="text-decoration: none; color: inherit"
+>
+  <div class="image-container">
+    <img [src]="episode.img_url" [alt]="episode.title" />
+    <span class="duration">{{ episode.duration }}</span>
+  </div>
+
+  <div class="card-body">
+    <h3 class="title">{{ episode.title }}</h3>
+
+    <div class="meta">
+      <span class="pill">S{{ episode.season }}</span>
+      <span class="pill">E{{ episode.episode }}</span>
+      <span class="date"
+        >Posted {{ episode.posted_on | date : "mediumDate" }}</span
+      >
+    </div>
+
+    <p class="description">{{ episode.description }}</p>
+
+    <audio *ngIf="episode.audio_url" controls>
+      <source [src]="episode.audio_url" type="audio/mpeg" />
+      Your browser does not support the audio element.
+    </audio>
+
+    <div class="links">
+      <span *ngIf="episode.spotify_url">🎧 Spotify</span>
+      <span *ngIf="episode.apple_podcasts_url">🍎 Apple</span>
+    </div>
+  </div>
+</a>
