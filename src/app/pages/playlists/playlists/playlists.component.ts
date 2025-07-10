@@ -16,6 +16,8 @@ export class PlaylistsComponent implements OnInit {
   loading = signal(true);
   error = signal<string | null>(null);
 
+  colorClasses = ['bg-color-1', 'bg-color-2', 'bg-color-3', 'bg-color-4'];
+
   constructor(private playlistService: PlaylistService) {}
 
   ngOnInit(): void {
@@ -29,5 +31,9 @@ export class PlaylistsComponent implements OnInit {
         this.loading.set(false);
       },
     });
+  }
+
+  getColorClass(index: number): string {
+    return this.colorClasses[index % this.colorClasses.length];
   }
 }
