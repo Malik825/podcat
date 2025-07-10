@@ -5,13 +5,9 @@ import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import {
   LucideAngularModule,
-  LayoutDashboard,
-  List,
-  MessageSquare,
-  Users,
-  LogOut,
-  Headphones
+  // Removed unused icons for clarity, but they can stay if needed
 } from 'lucide-angular';
+
 @Component({
   selector: 'app-admin-playlists',
   standalone: true,
@@ -44,37 +40,37 @@ export class AdminPlaylistsComponent implements OnInit {
     });
   }
 
-deletePlaylist(id: number): void {
-  const confirmDelete = confirm('Are you sure you want to delete this playlist?');
-  if (!confirmDelete) return;
+  deletePlaylist(id: number): void {
+    const confirmDelete = confirm('Are you sure you want to delete this playlist?');
+    if (!confirmDelete) return;
 
-  this.playlistService.deletePlaylist(id).subscribe({
-    next: () => {
-      console.log('✅ Playlist deleted');
-      this.fetchPlaylists();
-    },
-    error: (err) => {
-      console.error('❌ Failed to delete playlist:', err);
-      alert('Failed to delete playlist');
-    }
-  });
-}
-getPlaylistImage(id: number): string {
-  return `https://picsum.photos/seed/playlist-${id}/400/240`;
-}
-estimateDuration(count: number): string {
-  const avg = 10; // avg 10 mins per episode
-  const total = count * avg;
-  const h = Math.floor(total / 60);
-  const m = total % 60;
-  return `${h}h ${m}m`;
-}
+    this.playlistService.deletePlaylist(id).subscribe({
+      next: () => {
+        console.log('✅ Playlist deleted');
+        this.fetchPlaylists();
+      },
+      error: (err) => {
+        console.error('❌ Failed to delete playlist:', err);
+        alert('Failed to delete playlist');
+      }
+    });
+  }
 
-getRandomDuration(): string {
-  const min = Math.floor(Math.random() * 4) + 2;
-  const sec = Math.floor(Math.random() * 60).toString().padStart(2, '0');
-  return `${min}:${sec}`;
-}
+  getPlaylistImage(id: number): string {
+    return `https://picsum.photos/seed/playlist-${id}/300/200`;
+  }
 
+  estimateDuration(count: number): string {
+    const avg = 10; // avg 10 mins per episode
+    const total = count * avg;
+    const h = Math.floor(total / 60);
+    const m = total % 60;
+    return `${h}h ${m}m`;
+  }
 
+  getRandomDuration(): string {
+    const min = Math.floor(Math.random() * 4) + 2;
+    const sec = Math.floor(Math.random() * 60).toString().padStart(2, '0');
+    return `${min}:${sec}`;
+  }
 }

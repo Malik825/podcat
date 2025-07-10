@@ -19,19 +19,25 @@ import { CommonModule } from '@angular/common';
 import { TeamService } from '../../../core/services/team.service';
 import { ToastService } from '../../../core/services/toast.service';
 import { TeamMember } from '../../../models/team-member.model';
+import { LucideAngularModule } from "lucide-angular";
 
 @Component({
   selector: 'app-admin-team-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, LucideAngularModule],
   templateUrl: './admin-team-form.component.html',
   styleUrl: './admin-team-form.component.scss'
 })
 export class AdminTeamFormComponent implements OnInit, OnChanges {
   @Input() member: TeamMember | null = null;
   @Output() submitted = new EventEmitter<void>();
+  @Output() closed = new EventEmitter<void>();
 
   teamForm!: FormGroup;
+X: string = '';
+  showForm = false;
+
+  editingMember?: TeamMember;
 
   constructor(
     private fb: FormBuilder,
@@ -69,7 +75,10 @@ export class AdminTeamFormComponent implements OnInit, OnChanges {
       this.member?.social_media_links.find(link => link.platform === platform)?.url || ''
     );
   }
-
+ toggleForm(): void {
+    this.showForm = !this.showForm;
+    this.editingMember = undefined;
+  }
   onSubmit(): void {
     if (this.teamForm.invalid) return;
 
@@ -108,4 +117,7 @@ export class AdminTeamFormComponent implements OnInit, OnChanges {
       });
     }
   }
+
+
+
 }

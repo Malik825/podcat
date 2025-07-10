@@ -7,6 +7,7 @@
   max-width: 600px;
   margin: 0 auto;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  position: relative;
 
   h2 {
     font-size: 1.5rem;
@@ -110,5 +111,31 @@
       opacity: 0.6;
       cursor: not-allowed;
     }
+  }
+}
+
+.close{
+  position: absolute;
+  top: -1rem;
+  left: 1rem;
+  font-size: 1rem;
+  cursor: pointer;
+  color: var(--foreground);
+  background-color: var(--background);
+  padding: 0.5rem;
+  border-radius: 50%;
+  transition: background-color 0.3s ease;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: #059669 1px solid;
+  box-shadow: 0 0 0 1px #059669;
+  background: #059669;
+  color: #fff;
+  &:hover{
+    color: #059669;
+    background-color: var(--muted);
   }
 }

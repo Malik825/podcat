@@ -10,7 +10,7 @@
   <div *ngIf="!loading() && playlists().length > 0" class="playlist-grid">
     <div class="playlist-card" *ngFor="let playlist of playlists()">
       <div class="card-cover">
-        <img [src]="'https://picsum.photos/300/200?random=' + playlist.id" alt="Playlist Cover" />
+        <img [src]="getPlaylistImage(playlist.id)" alt="Playlist Cover" />
       </div>
 
       <div class="card-content">

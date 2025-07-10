@@ -1,4 +1,6 @@
   <div class="team-form-container">
+    <button class="close" (click)="toggleForm()" aria-label="Close form">✖</button>
+
     <h2>{{ member ? 'Edit Team Member' : 'Add Team Member' }}</h2>
     <form [formGroup]="teamForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
