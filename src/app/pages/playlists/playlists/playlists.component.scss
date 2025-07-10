@@ -1,27 +1,27 @@
 .scroll-aware-menu {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    border-top: 1px solid var(--accent);
-    z-index: 1000;
-    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
-  
-    &.hide {
-      transform: translateY(100%);
-      opacity: 0;
-    }
-  
-    &.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  
-    @media (min-width: 768px) {
-      display: none;
-    }
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid var(--accent);
+  z-index: 1000;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+
+  &.hide {
+    transform: translateY(100%);
+    opacity: 0;
   }
-  .playlists-page {
+
+  &.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  @media (min-width: 768px) {
+    display: none;
+  }
+}
+.playlists-page {
   max-width: 900px;
   margin: 2rem auto;
   padding: 1rem;
@@ -46,11 +46,13 @@
     padding: 1.5rem;
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.05);
     transition: transform 0.2s ease;
+    cursor: pointer;
 
     h3 {
       margin-bottom: 0.5rem;
       font-size: 1.3rem;
       color: #ffffff;
+      font-weight: bold;
     }
 
     p {
@@ -76,5 +78,9 @@
     &.empty {
       color: #888;
     }
+  }
+
+  .loading {
+    color: var(--foreground);
   }
 }

@@ -2,13 +2,14 @@ import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { PlaylistService } from '../../../core/services/playlist.service';
 import { Playlist } from '../../../models/playlist.model';
+import { HeaderComponent } from '../../../shared/components/header/header.component';
 
 @Component({
   selector: 'app-playlists',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, HeaderComponent],
   templateUrl: './playlists.component.html',
-  styleUrls: ['./playlists.component.scss']
+  styleUrls: ['./playlists.component.scss'],
 })
 export class PlaylistsComponent implements OnInit {
   playlists = signal<Playlist[]>([]);
@@ -26,7 +27,7 @@ export class PlaylistsComponent implements OnInit {
       error: () => {
         this.error.set('Failed to load playlists');
         this.loading.set(false);
-      }
+      },
     });
   }
 }

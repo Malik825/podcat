@@ -2,13 +2,7 @@ import { Component, effect, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
 import { MobileAdminMenuComponent } from '../../../shared/components/mobile-admin-menu/mobile-admin-menu.component';
-import {
-  Home,
-  Play,
-  List,
-  MessageSquare,
-  Users
-} from 'lucide-angular';
+import { Home, Play, List, MessageSquare, Users } from 'lucide-angular';
 import { EpisodeService } from '../../../core/services/episode.service';
 import { Episode } from '../../../models/episode.model';
 import { RouterModule } from '@angular/router';
@@ -16,14 +10,14 @@ import { RouterModule } from '@angular/router';
 @Component({
   selector: 'app-episodes-list',
   standalone: true,
- imports: [
+  imports: [
     CommonModule,
     HeaderComponent,
-    MobileAdminMenuComponent,
-    RouterModule // ✅ Required for routerLink
+    // MobileAdminMenuComponent,
+    RouterModule,
   ],
   templateUrl: './episodes-list.component.html',
-  styleUrls: ['./episodes-list.component.scss']
+  styleUrls: ['./episodes-list.component.scss'],
 })
 export class EpisodesListComponent implements OnInit {
   menuItems = [
@@ -31,7 +25,7 @@ export class EpisodesListComponent implements OnInit {
     { label: 'Episodes', icon: Play, route: ['/episodes'] },
     { label: 'Playlists', icon: List, route: ['/playlists'] },
     { label: 'Confess', icon: MessageSquare, route: ['/confessions'] },
-    { label: 'Team', icon: Users, route: ['/team'] }
+    { label: 'Team', icon: Users, route: ['/team'] },
   ];
 
   // ✅ Signals
@@ -50,7 +44,7 @@ export class EpisodesListComponent implements OnInit {
       error: (err: unknown) => {
         this.error.set('Failed to load episodes');
         this.loading.set(false);
-      }
+      },
     });
   }
 }

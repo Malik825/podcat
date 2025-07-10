@@ -1,3 +1,4 @@
+<app-header></app-header>
 <div class="episodes-page">
   <h2 class="page-title">🎙️ Latest Podcast Episodes</h2>
 
@@ -9,7 +10,7 @@
       *ngFor="let episode of episodes()"
       class="episode-card"
       [routerLink]="['/episodes', episode.id]"
-      style="text-decoration: none; color: inherit;"
+      style="text-decoration: none; color: inherit"
     >
       <div class="image-container">
         <img [src]="episode.img_url" [alt]="episode.title" />
@@ -22,7 +23,9 @@
         <div class="meta">
           <span class="pill">S{{ episode.season }}</span>
           <span class="pill">E{{ episode.episode }}</span>
-          <span class="date">Posted {{ episode.posted_on | date:'mediumDate' }}</span>
+          <span class="date"
+            >Posted {{ episode.posted_on | date : "mediumDate" }}</span
+          >
         </div>
 
         <p class="description">{{ episode.description }}</p>
