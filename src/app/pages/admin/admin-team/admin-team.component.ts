@@ -37,17 +37,22 @@ export class AdminTeamComponent {
     this.loadTeam();
   }
 
-  loadTeam(): void {
-    this.teamService.getTeamMembers().subscribe({
-      next: (response) => {
-        console.log('Updated team fetched:', response);
-        this.teamMembers = response.data;
-      },
-      error: (err) => {
-        console.error('Failed to fetch team members:', err);
-      }
-    });
-  }
+ loadTeam(): void {
+  this.teamService.getTeamMembers().subscribe({
+    next: (response) => {
+      this.teamMembers = response.data.map((member, index) => ({
+        ...member,
+        profile_image: member.profile_image?.trim()
+          ? member.profile_image
+          : `https://picsum.photos/seed/member${index}/200/200`
+      }));
+    },
+    error: (err) => {
+      console.error('Failed to fetch team members:', err);
+    }
+  });
+}
+
 
   toggleForm(): void {
     this.showForm = !this.showForm;

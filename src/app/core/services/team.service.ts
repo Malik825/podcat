@@ -2,7 +2,11 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
-import { TeamMember } from '../../models/team-member.model';
+import {
+  TeamMember,
+  CreateTeamMember,
+  UpdateTeamMember
+} from '../../models/team-member.model';
 
 @Injectable({
   providedIn: 'root'
@@ -16,16 +20,15 @@ export class TeamService {
     return this.http.get<{ status: string; data: TeamMember[] }>(this.baseUrl);
   }
 
-  addTeamMember(member: any): Observable<any> {
-    return this.http.post(this.baseUrl, member);
+  addTeamMember(member: CreateTeamMember): Observable<{ status: string; data: TeamMember }> {
+    return this.http.post<{ status: string; data: TeamMember }>(this.baseUrl, member);
   }
 
-  deleteTeamMember(id: number): Observable<any> {
-    return this.http.delete(`${this.baseUrl}/${id}`);
+  deleteTeamMember(id: number): Observable<{ status: string; message: string }> {
+    return this.http.delete<{ status: string; message: string }>(`${this.baseUrl}/${id}`);
   }
 
-  updateTeamMember(id: number, data: any): Observable<any> {
-    return this.http.put(`${this.baseUrl}/${id}`, data);
+  updateTeamMember(id: number, data: UpdateTeamMember): Observable<{ status: string; data: TeamMember }> {
+    return this.http.put<{ status: string; data: TeamMember }>(`${this.baseUrl}/${id}`, data);
   }
-  
 }
