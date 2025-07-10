@@ -28,17 +28,15 @@ export class EpisodesListComponent implements OnInit {
     { label: 'Team', icon: Users, route: ['/team'] },
   ];
 
-  // ✅ Signals
-  episodes = signal<Episode[]>([]);
   loading = signal(true);
   error = signal<string | null>(null);
 
-  constructor(private episodeService: EpisodeService) {}
+  constructor(public episodeService: EpisodeService) {}
 
   ngOnInit(): void {
     this.episodeService.getEpisodes().subscribe({
       next: (res: { status: string; data: Episode[] }) => {
-        this.episodes.set(res.data);
+        this.episodeService.episodes.set(res.data);
         this.loading.set(false);
       },
       error: (err: unknown) => {

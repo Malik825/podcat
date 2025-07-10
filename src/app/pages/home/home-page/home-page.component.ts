@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { Home, MessageSquare, List, Users, Play } from 'lucide-angular';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
 import { MobileAdminMenuComponent } from '../../../shared/components/mobile-admin-menu/mobile-admin-menu.component';
+import { EpisodeService } from '../../../core/services/episode.service';
 
 @Component({
   selector: 'app-home-page',
@@ -12,6 +13,7 @@ import { MobileAdminMenuComponent } from '../../../shared/components/mobile-admi
   styleUrl: './home-page.component.scss',
 })
 export class HomePageComponent {
+  public episodeService = inject(EpisodeService);
   menuItems = [
     { label: 'Home', icon: Home, route: ['/'] },
     { label: 'Episodes', icon: Play, route: ['/episodes'] },

@@ -1,27 +1,27 @@
 .scroll-aware-menu {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    border-top: 1px solid var(--accent);
-    z-index: 1000;
-    transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
-  
-    &.hide {
-      transform: translateY(100%);
-      opacity: 0;
-    }
-  
-    &.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
-  
-    @media (min-width: 1024px) {
-      display: none;
-    }
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border-top: 1px solid var(--accent);
+  z-index: 1000;
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out;
+
+  &.hide {
+    transform: translateY(100%);
+    opacity: 0;
   }
-  .episode-detail-page {
+
+  &.show {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  @media (min-width: 1024px) {
+    display: none;
+  }
+}
+.episode-detail-page {
   max-width: 900px;
   margin: 2rem auto;
   padding: 2rem;
@@ -98,16 +98,23 @@
       }
     }
   }
+}
 
-  .loading,
-  .error {
-    text-align: center;
-    font-size: 1.2rem;
-    padding: 2rem;
-    background-color: #222;
-    border-radius: 8px;
-    color: #ff6666;
-  }
+.loading,
+.error {
+  text-align: center;
+  font-size: 1.2rem;
+  padding: 2rem;
+  // background-color: #222;
+  border-radius: 8px;
+}
+
+.loading {
+  color: var(--foreground);
+}
+
+.error {
+  color: #ff6666;
 }
 
 @keyframes fadeInUp {

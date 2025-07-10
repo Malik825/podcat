@@ -5,9 +5,9 @@
   <div *ngIf="loading()" class="status loading">Loading...</div>
   <div *ngIf="error()" class="status error">{{ error() }}</div>
 
-  <div *ngIf="!loading() && episodes().length > 0" class="episode-grid">
+  <div *ngIf="!loading() && episodeService.episodes()" class="episode-grid">
     <a
-      *ngFor="let episode of episodes()"
+      *ngFor="let episode of episodeService.episodes()"
       class="episode-card"
       [routerLink]="['/episodes', episode.id]"
       style="text-decoration: none; color: inherit"
@@ -43,7 +43,7 @@
     </a>
   </div>
 
-  <div *ngIf="!loading() && episodes().length === 0" class="status empty">
+  <div *ngIf="!loading() && episodeService.episodes()" class="status empty">
     No episodes available at the moment.
   </div>
 </div>
