@@ -38,7 +38,7 @@ export class EpisodeDetailComponent implements OnInit {
 
   ngOnInit(): void {
     const idOrSlug = this.route.snapshot.paramMap.get('id');
-    // console.log('[EpisodeDetail] Route param:', idOrSlug);
+    console.log('[EpisodeDetail] Route param:', idOrSlug);
 
     if (idOrSlug) {
       console.log('[EpisodeDetail] Fetching episode from API...');

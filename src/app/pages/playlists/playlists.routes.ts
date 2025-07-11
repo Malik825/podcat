@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 import { PlaylistsComponent } from './playlists/playlists.component';
-import { PlaylistDetailsComponent } from '../playlist-details/playlist-details.component';
 
 export const PLAYLISTS_ROUTES: Routes = [
   {
@@ -10,7 +9,7 @@ export const PLAYLISTS_ROUTES: Routes = [
   },
   {
     path: ':id', // ✅ route for `/playlists/:id`
-    component: PlaylistDetailsComponent,
+    component: PlaylistsComponent,
     title: 'Playlist Details',
-  },
+  }
 ];
