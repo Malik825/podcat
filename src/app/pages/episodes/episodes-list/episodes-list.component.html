@@ -9,9 +9,9 @@
   <div *ngIf="loading()" class="status loading">Loading...</div>
   <div *ngIf="error()" class="status error">{{ error() }}</div>
 
-  <div *ngIf="!loading() && episodeService.episodes()" class="episode-grid">
+  <div *ngIf="!loading() && paginatedEpisodes()" class="episode-grid">
     <a
-      *ngFor="let episode of episodeService.episodes()"
+      *ngFor="let episode of paginatedEpisodes()"
       class="episode-card"
       [routerLink]="['/episodes', episode.id]"
       style="text-decoration: none; color: inherit"

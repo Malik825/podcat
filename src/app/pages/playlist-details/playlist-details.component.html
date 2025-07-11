@@ -54,7 +54,7 @@
       aria-label="Playback Progress"
       min="0"
       max="100"
-      value="30"
+      [value]="currentProgress"
     />
     <div class="playback-controls" role="group" aria-label="Playback Controls">
       <button class="btn prev-btn" aria-label="Previous Track">
@@ -74,8 +74,14 @@
           <line x1="5" y1="19" x2="5" y2="5"></line>
         </svg>
       </button>
-      <button class="btn play-btn" aria-label="Play" aria-pressed="false">
+      <button
+        class="btn play-btn"
+        aria-label="Play"
+        aria-pressed="false"
+        (click)="playCurrentEpisode()"
+      >
         <svg
+          *ngIf="!isPlaying"
           aria-hidden="true"
           focusable="false"
           width="32"
@@ -88,6 +94,22 @@
           stroke-linejoin="round"
         >
           <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+        <svg
+          *ngIf="isPlaying"
+          aria-hidden="true"
+          focusable="false"
+          width="32"
+          height="32"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          <rect x="6" y="4" width="4" height="16"></rect>
+          <rect x="14" y="4" width="4" height="16"></rect>
         </svg>
       </button>
       <button class="btn next-btn" aria-label="Next Track">
@@ -130,22 +152,6 @@
             <span>{{ episode.title }}</span>
           </p>
         </div>
-        <button class="btn play-item-btn" aria-label="Play Love To Dance">
-          <svg
-            aria-hidden="true"
-            focusable="false"
-            width="20"
-            height="20"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-          </svg>
-        </button>
       </li>
       }
     </ul>
