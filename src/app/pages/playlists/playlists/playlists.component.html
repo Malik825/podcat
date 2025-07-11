@@ -14,6 +14,7 @@
       *ngFor="let playlist of playlists(); let i = index"
       class="playlist-card"
       [ngClass]="getColorClass(i)"
+      (click)="goToDetails(playlist.id)"
     >
       <h3>{{ playlist.name }}</h3>
       <p>{{ playlist.description }}</p>
