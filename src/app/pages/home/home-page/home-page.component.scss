@@ -23,8 +23,8 @@
 }
 .banner-section {
   padding: 4rem 2rem;
-  background: linear-gradient(135deg, #1b1e2f, #141625);
-  color: #fff;
+  background: var(--background);
+  color: var(--foreground);
   position: relative;
   overflow: hidden;
   margin-top: 1.8rem;

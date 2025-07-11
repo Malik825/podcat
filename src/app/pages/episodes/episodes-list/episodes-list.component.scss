@@ -24,8 +24,8 @@
 .episodes-page {
   padding: 2rem;
   min-height: 100vh;
-  background: linear-gradient(to bottom right, #1c1c1c, #000);
-  color: #fff;
+  background: var(--background);
+  color: var(--foreground);
 
   .page-title {
     text-align: center;
