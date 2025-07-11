@@ -5,7 +5,6 @@ import { Playlist } from '../../../models/playlist.model';
 import { HeaderComponent } from '../../../shared/components/header/header.component';
 import { Home, Play, List, MessageSquare, Users } from 'lucide-angular';
 import { MobileAdminMenuComponent } from '../../../shared/components/mobile-admin-menu/mobile-admin-menu.component';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-playlists',
@@ -28,10 +27,7 @@ export class PlaylistsComponent implements OnInit {
   ];
   colorClasses = ['bg-color-1', 'bg-color-2', 'bg-color-3', 'bg-color-4'];
 
-  constructor(
-    private playlistService: PlaylistService,
-    private router: Router
-  ) {}
+  constructor(private playlistService: PlaylistService) {}
 
   ngOnInit(): void {
     this.playlistService.getPlaylists().subscribe({
@@ -48,9 +44,5 @@ export class PlaylistsComponent implements OnInit {
 
   getColorClass(index: number): string {
     return this.colorClasses[index % this.colorClasses.length];
-  }
-
-  goToDetails(id: number) {
-    this.router.navigate(['/playlists', id]);
   }
 }
