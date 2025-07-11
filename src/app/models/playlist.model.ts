@@ -1,3 +1,5 @@
+import { Episode } from './episode.model';
+
 export interface Playlist {
   id: number;
   name: string;
@@ -6,13 +8,7 @@ export interface Playlist {
   featured: boolean;
   created_at: string;
   updated_at: string;
-  episodes: {
-    id: number;
-    title: string;
-    description: string;
-    duration: string;
-    posted_on: string;
-  }[];
+  episodes: Episode[];
   items?: string[];
 }
 

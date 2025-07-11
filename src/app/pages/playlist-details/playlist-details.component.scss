@@ -14,6 +14,16 @@
   margin-top: 50px;
 }
 
+/* Hide scrollbar for music player */
+.music-player::-webkit-scrollbar {
+  display: none;
+}
+
+.music-player {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
 .player-header {
   position: relative;
   background-image: url("/assets/images/love-to-dance.jpg");

@@ -33,8 +33,8 @@ export class EpisodesListComponent implements OnInit {
   ];
 
   first = 0;
-  rows = 10;
-
+  rows = 5;
+  paginatedEpisodes = signal<Episode[]>([]);
   loading = signal(true);
   error = signal<string | null>(null);
 
@@ -44,6 +44,7 @@ export class EpisodesListComponent implements OnInit {
     this.episodeService.getEpisodes().subscribe({
       next: (res: { status: string; data: Episode[] }) => {
         this.episodeService.episodes.set(res.data);
+        this.updatePaginatedEpisodes();
         this.loading.set(false);
       },
       error: (err: unknown) => {
@@ -53,8 +54,16 @@ export class EpisodesListComponent implements OnInit {
     });
   }
 
+  updatePaginatedEpisodes() {
+    const episodes = this.episodeService.episodes();
+    this.paginatedEpisodes.set(
+      episodes.slice(this.first, this.first + this.rows)
+    );
+  }
+
   onPageChange(event: PaginatorState) {
     this.first = event.first ?? 0;
-    this.rows = event.rows ?? 10;
+    this.rows = event.rows ?? 5;
+    this.updatePaginatedEpisodes();
   }
 }
