@@ -6,6 +6,7 @@ import { EpisodeService } from '../../../core/services/episode.service';
 import { EpisodeCardComponent } from '../../../shared/components/episode-card/episode-card.component';
 import { Episode } from '../../../models/episode.model';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { MeetTheTeamComponent } from '../../../shared/components/meet-the-team/meet-the-team.component';
 
 @Component({
   selector: 'app-home-page',
@@ -15,6 +16,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     MobileAdminMenuComponent,
     EpisodeCardComponent,
     ProgressSpinnerModule,
+    MeetTheTeamComponent,
   ],
   templateUrl: './home-page.component.html',
   styleUrl: './home-page.component.scss',
