@@ -10,10 +10,17 @@
         <h3>{{ teamMember()?.name }}</h3>
         <p>{{ teamMember()?.role }}</p>
         <div class="social-icons">
-          @for( socialMediaLink of teamMember()?.social_media_links; track socialMediaLink){
-            <a href="{{ socialMediaLink.url }}" target="_blank">
-             <span>{{ socialMediaLink.platform }}</span>
-            </a>
+          @for( socialMediaLink of teamMember()?.social_media_links; track
+          socialMediaLink){
+          <a href="{{ socialMediaLink.url }}" target="_blank">
+            @if(socialMediaLink.platform == 'LinkedIn'){
+            <i class="fa-brands fa-linkedin-in"></i>
+            }@else if(socialMediaLink.platform == 'Twitter'){
+            <i class="fa-brands fa-twitter"></i>
+            }@else if(socialMediaLink.platform == 'Instagram'){
+            <i class="fa-brands fa-instagram"></i>}
+            <!-- <span>{{ socialMediaLink.platform }}</span> -->
+          </a>
           }
           <!-- <i class="fa-brands fa-github"></i>
           <i class="fa-brands fa-twitter"></i>
