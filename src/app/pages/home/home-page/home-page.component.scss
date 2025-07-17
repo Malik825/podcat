@@ -151,6 +151,8 @@ h1 {
 }
 
 .team-container{
+  display: grid;
+  // gap: 2rem;
   padding: 1.5rem 7rem;
   background: var(--background);
   color: var(--foreground);
@@ -161,4 +163,21 @@ h1 {
     padding: 1.5rem 1rem;
   }
 
+}
+
+.team-cards {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+@media screen and (min-width: 600px) {
+  .team-cards {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .team-card {
+    max-width: 100%;
+  }
 }
