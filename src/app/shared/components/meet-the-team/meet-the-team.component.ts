@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, input } from '@angular/core';
+import { TeamMember } from '../../../models/team-member.model';
 
 @Component({
   selector: 'app-meet-the-team',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './meet-the-team.component.scss'
 })
 export class MeetTheTeamComponent {
-
+ teamMember = input<TeamMember>()
 }

@@ -43,6 +43,10 @@
   <div class="team-container">
     <hr />
     <h1>Meet The Team</h1>
-    <app-meet-the-team></app-meet-the-team>
+    <div class="team-cards">
+      @for( teamMember of teamMembers(); track teamMember.id){
+      <app-meet-the-team [teamMember]="teamMember"></app-meet-the-team>
+      }
+    </div>
   </div>
 </section>

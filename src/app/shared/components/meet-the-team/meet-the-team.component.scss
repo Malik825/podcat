@@ -55,9 +55,9 @@
         justify-content: center;
         gap: 1rem;
 
-        i {
+        span {
           font-size: 1rem;
-          color: var(--foreground);
+          color: #b4c5ff;
           cursor: pointer;
           transition: color 0.3s;
 
@@ -70,19 +70,19 @@
   }
 }
 
-.team-cards {
-  display: grid;
-  justify-content: center;
-  grid-template-columns: repeat(1, 1fr);
-  gap: 2rem;
-  flex-wrap: wrap;
-}
-@media screen and (min-width: 600px) {
-  .team-cards {
-    grid-template-columns: repeat(3, 1fr);
-  }
+// .team-cards {
+//   display: grid;
+//   justify-content: center;
+//   grid-template-columns: repeat(1, 1fr);
+//   gap: 2rem;
+//   flex-wrap: wrap;
+// }
+// @media screen and (min-width: 600px) {
+//   .team-cards {
+//     grid-template-columns: repeat(3, 1fr);
+//   }
 
-  .team-card {
-    max-width: 100%;
-  }
-}
+//   .team-card {
+//     max-width: 100%;
+//   }
+// }
